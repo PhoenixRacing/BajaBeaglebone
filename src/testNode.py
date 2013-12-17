@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import ros
+import rospy
 from std_msgs.msg import String
 
 
