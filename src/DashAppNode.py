@@ -5,5 +5,5 @@ from DashApp import dashApp
 
 if __name__ == '__main__':
 	rospy.init_node('listener', anonymous=True)
-	rospy.Subscriber('chatter', String, dashApp.callback)
-	dashApp.run()
+	rospy.Subscriber('chatter', String, dashApp.timeCallback)
+	dashApp.run(debug=True)
