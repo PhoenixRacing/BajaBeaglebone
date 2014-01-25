@@ -1,7 +1,4 @@
 import Adafruit_BBIO.GPIO as GPIO
 
-GPIO.setup("P8_14", GPIO.IN)
-if GPIO.input("P8_14"):
-    print 'high'
-else:
-    print 'low'
+GPIO.setup("P8_3", GPIO.IN)
+pr GPIO.input("P8_3"):
