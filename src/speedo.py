@@ -1,4 +1,10 @@
 import Adafruit_BBIO.GPIO as GPIO
 
-GPIO.setup("P8_3", GPIO.IN)
-pr GPIO.input("P8_3"):
+GPIO.add_event_detect("P8_3", GPIO.RISING)
+
+try:
+    while True:
+        if GPIO.event_detected("P8_3"):
+            print "input rising"
+except KeyboardInterrupt:
+    GPIO.cleanup()
