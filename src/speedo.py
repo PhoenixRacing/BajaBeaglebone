@@ -1,5 +1,5 @@
 import Adafruit_BBIO.GPIO as GPIO
-
+GPIO.setup("P8_3", GPIO.IN)
 GPIO.add_event_detect("P8_3", GPIO.RISING)
 
 try:
