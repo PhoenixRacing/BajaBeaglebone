@@ -1,14 +1,13 @@
+from Sensor import *
 import time
-from collections import deque
 
-class HallEffect(object):
+class HallEffect(Sensor):
 
 	def __init__(self, magnets, numPoints=10):
+		super(self.__class__, self).__init__(numPoints)
 		self.magnets = magnets
 		self.lastEdge = None
 		self.currentEdge = time.time()
-		self.currentRPM = 0
-		self.RPMMemory = deque(maxlen=numPoints)
 
 	def risingEdge(self):
 		self.lastEdge = self.currentEdge
@@ -16,18 +15,11 @@ class HallEffect(object):
 		self.updateRPM()
 
 	def updateRPM(self):
-		rawRPM = 1 / ((self.currentEdge - self.lastEdge) * self.magnets) * 60.0
-		self.RPMMemory.append(rawRPM)
-		self.setCurrentRPM(sum(self.RPMMemory) / len(self.RPMMemory))
+		self.addToMemory(self.calculateRPM())
+		self.setSensorVal(self.processMemory('average'))
 
-	def setCurrentRPM(self, RPM): 
-		self.currentRPM = RPM
-
-	def getCurrentRPM(self):
-		return self.currentRPM
-
-	def __repr__(self):
-		return "RPM: %s \t Num Points: %d"%(self.getCurrentRPM(), len(self.RPMMemory)) 
+	def calculateRPM(self):
+		return 1 / ((self.currentEdge - self.lastEdge) * self.magnets) * 60.0
 
 
 if __name__=='__main__':
