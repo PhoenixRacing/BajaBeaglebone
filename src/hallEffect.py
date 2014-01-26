@@ -3,8 +3,8 @@ import time
 
 class HallEffect(Sensor):
 
-	def __init__(self, magnets, numPoints=10):
-		super(self.__class__, self).__init__(numPoints)
+	def __init__(self, pins, magnets, numPoints=10):
+		super(self.__class__, self).__init__(pins, numPoints)
 		self.magnets = magnets
 		self.lastEdge = None
 		self.currentEdge = time.time()
@@ -25,8 +25,7 @@ class HallEffect(Sensor):
 if __name__=='__main__':
 
 	import random
-
-	h = HallEffect(2)
+	h = HallEffect(["GPIO_30"], 2)
 
 	for i in range(1000):
 		time.sleep((.95 + random.random()/10) / 100)
