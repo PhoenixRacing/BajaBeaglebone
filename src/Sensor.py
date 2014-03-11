@@ -20,6 +20,8 @@ class Sensor(object):
 	def processMemory(self, method):
 		if method=='average':
 			return sum(self.memory) / len(self.memory)
+		elif method=='median':
+			return sorted(self.memory)[len(self.memory)//2]
 		else:
 			return None
 
