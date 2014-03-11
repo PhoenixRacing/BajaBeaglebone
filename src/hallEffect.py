@@ -18,7 +18,7 @@ class HallEffect(Sensor):
 
 	def updateRPM(self):
 		self.addToMemory(self.calculateRPM())
-		self.setSensorVal(self.processMemory('average'))
+		self.setSensorVal(self.processMemory('median'))
 
 	def calculateRPM(self):
 		return 1 / ((self.currentEdge - self.lastEdge) * self.magnets) * 60.0
@@ -30,7 +30,7 @@ class HallEffect(Sensor):
 			print self
 
 if __name__=='__main__':
-	h = HallEffect(["P8_10"], 1, numPoints=1)
+	h = HallEffect(["P8_10"], 1, numPoints=5)
 	h.run()
 	
 	
