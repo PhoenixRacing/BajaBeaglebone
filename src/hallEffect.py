@@ -1,10 +1,12 @@
 from Sensor import *
 import time
+import Adafruit_BBIO.GPIO as GPIO
 
 class HallEffect(Sensor):
 
 	def __init__(self, pins, magnets, numPoints=10):
 		super(self.__class__, self).__init__(pins, numPoints)
+		GPIO.setup(pins[0], GPIO.IN)
 		self.magnets = magnets
 		self.lastEdge = None
 		self.currentEdge = time.time()
@@ -21,13 +23,14 @@ class HallEffect(Sensor):
 	def calculateRPM(self):
 		return 1 / ((self.currentEdge - self.lastEdge) * self.magnets) * 60.0
 
+	def run(self):
+		while True:
+			GPIO.wait_for_edge(self.pins[0], GPIO.RISING)
+			self.risingEdge()
+			print self
 
 if __name__=='__main__':
-
-	import random
-	h = HallEffect(["GPIO_30"], 2)
-
-	for i in range(1000):
-		time.sleep((.95 + random.random()/10) / 100)
-		h.risingEdge()
-		print h
+	h = HallEffect(["P8_10"], 1, numPoints=1)
+	h.run()
+	
+	
