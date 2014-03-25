@@ -62,6 +62,11 @@ def test_lock(message):
 	l = 1;
 	emit('updateLock', {'lock': l})
 
+def run():
+        socketio.run(app)
 
 if __name__ == '__main__':
-    socketio.run(app)
+        import sys
+        sys.path.append('../')
+        from PhoenixMaster import *
+        PhoenixMaster(run)

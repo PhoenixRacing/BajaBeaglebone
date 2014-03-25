@@ -32,4 +32,5 @@ class PhoenixMaster(object):
 		except (KeyboardInterrupt, SystemExit):
 			sys.exit()
 
-PhoenixMaster(sendMessageA, listenForMessageA)
+if __name__=="__main__":
+        PhoenixMaster(sendMessageA, listenForMessageA)
