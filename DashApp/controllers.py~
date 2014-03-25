@@ -1,0 +1,10 @@
+from DashApp import dashApp
+
+@dashApp.route('/')
+@dashApp.route('/index')
+def index():
+	return "Hello, World!"
+
+@dashApp.route('/time')
+def time():
+	return dashApp.time
