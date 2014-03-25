@@ -1,0 +1,115 @@
+body {
+	background-color:#e0e0e0;
+	font-family:Arial;
+	color:#181818;
+}
+
+.speed2 {
+	font-size: 500px;
+
+}
+
+.speed_display {
+	font-family:Arial;
+	position:fixed;
+	width:100%;
+	text-align: center;
+	top:100px;
+}
+
+
+.upper_left {
+	font-size:7em;
+	color: #e0e0e0;
+	font-family:Arial;
+	position: absolute;
+	top: 40px;
+	left: 60px;
+}
+
+.upper_right {
+	font-size: 7em;
+	color: #e0e0e0;
+	font-family:Arial;
+	position: absolute;
+	top: 40px;
+	right: 60px;
+}
+
+.brake_bar {
+	border-style: solid;
+	position:fixed;
+	left:220px;
+	top:150px;
+	width:60px;
+	height:500px;
+	background-color: #181818;
+}
+
+.brake_bar_fill {
+	background-color: #e0e0e0;
+	height:40%;
+	width:100%;
+}
+
+.throttle_bar {
+	border-style: solid;
+	position:fixed;
+	right:220px;
+	top:150px;
+	width:60px;
+	height:500px;
+	background-color: #181818;
+}
+
+.throttle_bar_fill {
+	background-color:#e0e0e0;
+	height:40%;
+	width:100%;
+}
+
+.previous {
+	font-size:2em;
+	position:fixed;
+	width:300px;
+	height:auto;
+	top:40px;
+	left:500px;
+	text-align:center;
+}
+
+.current {
+	font-size:2em;
+	position:fixed;
+	width:300px;
+	height:auto;
+	bottom:10px;
+	left:500px;
+	text-align:center;
+
+}
+
+.prev_time {
+	font-weight:bold;
+	font-size:5em;
+	color:#680000;
+	position:fixed;
+	width:300px;
+	height:150px;
+	top:0px;
+	left:770px;
+	text-align: center;
+
+}
+
+.curr_time {
+	font-weight: bold;
+	font-size:5em;
+	color:#680000;
+	position:fixed;
+	width:300px;
+	height:150px;
+	bottom:70px;
+	left:770px;
+	text-align: center;
+}

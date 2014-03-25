@@ -1,0 +1,71 @@
+body {
+	background-color:#e0e0e0;
+}
+
+.speed2 {
+	font-size: 500px;
+
+}
+
+h1 {
+	color:#181818;
+}
+
+.speed_display {
+	font-family:Arial;
+	position:fixed;
+	width:100%;
+	text-align: center;
+	top:100px;
+}
+
+
+.upper_left {
+	font-size:7em;
+	color: #e0e0e0;
+	font-family:Arial;
+	position: absolute;
+	top: 40px;
+	left: 60px;
+}
+
+.upper_right {
+	font-size: 7em;
+	color: #e0e0e0;
+	font-family:Arial;
+	position: absolute;
+	top: 40px;
+	right: 60px;
+}
+
+.brake_bar {
+	border-style: solid;
+	position:fixed;
+	left:220px;
+	top:150px;
+	width:60px;
+	height:500px;
+	background-color: #181818;
+}
+
+.brake_bar_fill {
+	background-color: #e0e0e0;
+	height:40%;
+	width:100%;
+}
+
+.throttle_bar {
+	border-style: solid;
+	position:fixed;
+	right:220px;
+	top:150px;
+	width:60px;
+	height:500px;
+	background-color: #181818;
+}
+
+.throttle_bar_fill {
+	background-color:#e0e0e0;
+	height:40%;
+	width:100%;
+}

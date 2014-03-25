@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Competition Dashboard</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='comp_style.css') }}">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="http:////cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='dash.js') }}"></script>	
+</head>
+
+<body>
+
+	<div class = "speed_display">
+		<h1>
+			<span class = "speed2" id="speed"><div id="speed_list"></div></span>
+		</h1>
+	</div>
+
+	<div class = "upper_left">
+		<strong>S</strong>
+	</div>
+
+	<div class = "upper_right">
+		<strong>L</strong>
+	</div>
+
+	<div class = "brake_bar">
+		<div class = "brake_bar_fill"></div>
+	</div>
+
+	<div class = "throttle_bar">
+		<div class = "throttle_bar_fill"></div>
+	</div>
+
+
+
+
+</body>
+</html>

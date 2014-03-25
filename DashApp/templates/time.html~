@@ -1,6 +1,0 @@
-<html>
-<head></head>
-<body>
-<div>Hi! The time is {{time}}.</div>
-</body>
-</html
