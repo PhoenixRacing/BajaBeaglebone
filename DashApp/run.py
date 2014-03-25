@@ -7,10 +7,20 @@ from flask.ext.socketio import SocketIO, emit
 from flask import Flask
 from flask import render_template
 
-app = Flask(__name__)
+class DashApp(Flask):
+	def __init__(self):
+		super(self.__class__, self).__init__(__name__)
+		self.speed = 0
+
+	def update_speed(self, speed):
+		self.speed = speed
+
+
+app = DashApp()
 app.debug=True
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
+
 
 #Loads the dashboard for competition
 @app.route('/')
@@ -23,10 +33,9 @@ def index():
 def competition():
 	return render_template('test_dash.html', speed = 0)
 
-
 @socketio.on('update', namespace='/test')
 def test_message(message):
-	emit('updateSpeed', {'speed': random.randint(0, 25)})
+	emit('updateSpeed', {'speed': app.speed })
 
 format = '%M:%S';
 
@@ -65,8 +74,13 @@ def test_lock(message):
 def run():
         socketio.run(app)
 
+def run_update_speed():
+	while(True):
+		app.update_speed(random.randint(1,25))
+		time.sleep(1)
+
 if __name__ == '__main__':
         import sys
         sys.path.append('../')
         from PhoenixMaster import *
-        PhoenixMaster(run)
+        PhoenixMaster(run, run_update_speed)
