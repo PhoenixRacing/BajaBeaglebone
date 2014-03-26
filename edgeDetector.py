@@ -2,7 +2,7 @@ from Sensor import *
 import time
 import Adafruit_BBIO.GPIO as GPIO
 
-class HallEffect(Sensor):
+class EdgeDetector(Sensor):
 
 	def __init__(self, pins, magnets, numPoints=10):
 		super(self.__class__, self).__init__(pins, numPoints)
@@ -30,7 +30,7 @@ class HallEffect(Sensor):
 			print self
 
 if __name__=='__main__':
-	h = HallEffect(["P8_10"], 1, numPoints=5)
+	h = EdgeDetector(["P8_10"], 1, numPoints=5)
 	h.run()
 	
 	
