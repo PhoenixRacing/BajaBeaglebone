@@ -1,3 +1,4 @@
+import edgeDetector
 from collections import deque
 
 """Abstract class for sensors on Baja car"""
