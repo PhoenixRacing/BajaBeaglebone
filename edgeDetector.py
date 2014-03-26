@@ -27,7 +27,7 @@ class EdgeDetector(Sensor):
 		while True:
 			GPIO.wait_for_edge(self.pins[0], GPIO.RISING)
 			self.risingEdge()
-			print self
+			self.publish()  #####CRUCIAL####
 
 if __name__=='__main__':
 	h = EdgeDetector(["P8_10"], 1, numPoints=5)

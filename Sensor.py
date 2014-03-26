@@ -26,7 +26,7 @@ class Sensor(object):
 			return None
 
         def publish(self):
-                raise NotImplementedError
+                print self
 
 	def __repr__(self):
 		return "Sensor: %s \t Val: %.3f \t Num Points: %d \t Pins: %s"%(type(self).__name__, self.getSensorVal(), len(self.memory), self.pins) 

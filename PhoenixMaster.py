@@ -1,8 +1,8 @@
 import time
 import threading
 import sys
-from PubA import sendMessageA
-from SubA import listenForMessageA
+from dummySpeedPub import sendSpeed
+import dashAppNode
 
 """ Starts each program as a separate Python thread
 These all die when the main thread is interrupted
@@ -33,4 +33,4 @@ class PhoenixMaster(object):
 			sys.exit()
 
 if __name__=="__main__":
-        PhoenixMaster(sendMessageA, listenForMessageA)
+        PhoenixMaster(dashAppNode.run, sendSpeed)
