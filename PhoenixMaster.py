@@ -3,6 +3,7 @@ import threading
 import sys
 from dummySpeedPub import sendSpeed
 import dashAppNode
+import sensorNode
 
 """ Starts each program as a separate Python thread
 These all die when the main thread is interrupted
@@ -33,4 +34,4 @@ class PhoenixMaster(object):
 			sys.exit()
 
 if __name__=="__main__":
-        PhoenixMaster(dashAppNode.run, sendSpeed)
+        PhoenixMaster(dashAppNode.run, sendSpeed, sensorNode.frontLeftHall.run)
