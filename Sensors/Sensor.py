@@ -9,7 +9,7 @@ class Sensor(object):
 		self.val = None
 
 	def clearMemory(self):
-		self.memory = deque(maxlen=numPoints)
+		self.memory.clear()
 
 	def setSensorVal(self, val):
 		self.val = val
@@ -41,6 +41,9 @@ class Sensor(object):
 		if not self.memory:
 			return 0
 		return sorted(self.memory)[len(self.memory)//2]
+
+	def setPublishFunc(self, func):
+		self.publish = func
 
 	def publish(self):
 		print self
