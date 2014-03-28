@@ -46,5 +46,3 @@ class EdgeDetector(Sensor):
 if __name__=='__main__':
 	h = EdgeDetector(["P8_10"], 1, numPoints=5, timeout=1)
 	h.run()
-	
-	
