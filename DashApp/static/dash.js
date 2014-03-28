@@ -15,71 +15,51 @@ $(document).ready(function(){
         socket.emit('update', {data : {}});    
     }
 
-    //updates the previous time and displays on the testing dashboard
-    socket.on('updatePtime', function(msg) {
+    //updates the time and displays on the testing dashboard
+    socket.on('updateTime', function(msg) {
         $('#prev_time').html('<p>' + msg.prev + '</p>');
+        $('#curr_time').html('<p>' + msg.curr + '</p>');
     });
     setInterval(getPtime, 100);
     function getPtime() {
-        socket.emit('update ptime', {data : {}});
+        socket.emit('update time', {data : {}});
     }
 
-    //updates the current time and displays on the testing dashboard
-    socket.on('updateCtime', function(msg) {
-        $('#curr_time').html('<p>' + msg.curr + '</p>');
-    });
-    setInterval(getCtime, 100);
-    function getCtime() {
-        socket.emit('current time', {data : {}});
-    }
 
-    //updates the brake fill and displays to the left of the speed
-    socket.on('updateBrake', function(msg) {
+    //Updates the throttle fill bar (to the right of the speed)
+    //Updates the brake fill bar (to the left of the speed)
+    socket.on('updateBrakeThrottle', function(msg) {
         var b_percent = msg.brake * 100;
         var str_b_percent = b_percent.toString();
         var brake = str_b_percent.concat("%");
         $(".brake_bar_fill").css( "height", brake );
-    });
-    setInterval(getBrake, 80);
-    function getBrake() {
-        socket.emit('update brake', {data : {}});
-    }
 
-    //updates the throttle fill and displays to the right of the speed
-    socket.on('updateThrottle', function(msg) {
         var throt_p =  msg.throttle*100;
         var str_throttle = throt_p.toString();
         var throttle = str_throttle.concat("%");
         $(".throttle_bar_fill").css("height", throttle );
     });
-    setInterval(getThrottle, 80);
-    function getThrottle() { 
-        socket.emit('update throttle', {data : {}});
-    }
+    setInterval(getBrakeThrottle, 80);
+    function getBrakeThrottle() {
+        socket.emit('update brake_throttle', {data : {}});
+    }  
 
-    //Displays an S if wheel spinning 
-    socket.on('updateSpin', function(msg) {
+
+    //Display an L if wheel lock, an S if wheel spin
+    socket.on('updateSL', function(msg) {
         var spin = msg.spin;
         if (spin) {
             $(".upper_left").css("color", "#D80000");
         }
-    })
-    setInterval(getSpin, 200);
-    function getSpin() {
-        socket.emit('update spin', {data: {}});
-    }
-
-    //Display an L if wheel locking
-    socket.on('updateLock', function(msg) {
         var lock = msg.lock;
         if (lock) {
             $(".upper_right").css("color", "#D80000");
         }
     })
-    setInterval(getLock, 200);
-    function getLock() {
-        socket.emit('update lock', {data: {}});
-    }
+    setInterval(getSpinLock, 200);
+    function getSpinLock() {
+        socket.emit('update spin_lock', {data: {}});
+    }  
 
 
  });
