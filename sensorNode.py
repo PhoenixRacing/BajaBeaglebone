@@ -7,19 +7,19 @@ def publishFrontLeftHall():
 	dispatcher.send(signal=frontLeftHall.getSensorVal(), sender="frontLeftHall")
 frontLeftHall.setPublishFunc(publishFrontLeftHall)
 
-frontRightHall = EdgeDetector(["P8_10"], 1)
+frontRightHall = EdgeDetector(["P8_11"], 1)
 def publishFrontLeftHall():
 	print frontRightHall
 	dispatcher.send(signal=frontRightHall.getSensorVal(), sender="frontRightHall")
 frontRightHall.setPublishFunc(publishFrontLeftHall)
 
-backLeftHall = EdgeDetector(["P8_10"], 1)
+backLeftHall = EdgeDetector(["P8_12"], 1)
 def publishFrontLeftHall():
 	print backLeftHall
 	dispatcher.send(signal=backLeftHall.getSensorVal(), sender="backLeftHall")
 backLeftHall.setPublishFunc(publishFrontLeftHall)
 
-backRightHall = EdgeDetector(["P8_10"], 1)
+backRightHall = EdgeDetector(["P8_13"], 1)
 def publishFrontLeftHall():
 	print backRightHall
 	dispatcher.send(signal=backRightHall.getSensorVal(), sender="backRightHall")
