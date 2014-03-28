@@ -8,6 +8,9 @@ class Sensor(object):
 		self.memory = deque(maxlen=numPoints)
 		self.val = None
 
+	def clearMemory(self):
+		self.memory = deque(maxlen=numPoints)
+
 	def setSensorVal(self, val):
 		self.val = val
 
@@ -19,14 +22,24 @@ class Sensor(object):
 
 	def processMemory(self, method):
 		if method=='average':
-			return sum(self.memory) / len(self.memory)
+			return self.average()
 		elif method=='median':
-			return sorted(self.memory)[len(self.memory)//2]
+			return self.median()
 		else:
 			return None
 
-        def publish(self):
-                print self
+	def average(self):
+		if not self.memory:
+			return 0
+		return sum(self.memory) / len(self.memory)
+
+	def median(self):
+		if not self.memory:
+			return 0
+		return sorted(self.memory)[len(self.memory)//2]
+
+	def publish(self):
+		print self
 
 	def __repr__(self):
 		return "Sensor: %s \t Val: %.3f \t Num Points: %d \t Pins: %s"%(type(self).__name__, self.getSensorVal(), len(self.memory), self.pins) 
