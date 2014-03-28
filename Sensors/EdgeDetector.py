@@ -1,7 +1,6 @@
 from Sensor import *
 import time
 import Adafruit_BBIO.GPIO as GPIO
-from datetime import timedelta, datetime
 
 class EdgeDetector(Sensor):
 
@@ -12,7 +11,6 @@ class EdgeDetector(Sensor):
 		self.lastEdge = None
 		self.currentEdge = time.time()
 		self.timeout = timeout
-		self.last_edge = datetime.utcnow()
 
 	def risingEdge(self):
 		self.lastEdge = self.currentEdge
@@ -28,7 +26,7 @@ class EdgeDetector(Sensor):
 		return 1 / ((self.currentEdge - self.lastEdge) * self.magnets) * 60.0
 
 	def setZero():
-		self.clearMemory()	#a timeout is a clean data point, we don't want them being average away
+		self.clearMemory()	#dont want this to be swallowed
 		self.setSensorVal(0)
 
 	def run(self):
@@ -37,9 +35,9 @@ class EdgeDetector(Sensor):
 			if GPIO.event_detected(self.pins[0]):
 				self.risingEdge()
 				self.publish()
-				self.last_edge = datetime.utcnow()
-			if datetime.utcnow() - self.last_edge > self.timeout:
+			if time.time() - self.lastEdge > self.timeout:
 				self.setZero()
+				self.lastEdge = time.time()
 				self.publish()
 
 

@@ -20,6 +20,10 @@ class Sensor(object):
 	def addToMemory(self, val):
 		self.memory.append(val)
 
+	def measureProcessAndSet(self, data, process_type):
+		self.addToMemory(data)
+		self.setSensorVal(self.processMemory(process_type))
+
 	def processMemory(self, method):
 		if method=='average':
 			return self.average()
