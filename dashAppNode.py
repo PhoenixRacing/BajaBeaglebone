@@ -1,9 +1,16 @@
 from pydispatch import dispatcher
 import urllib2
+import urllib
 
 def handleSpeed(sender, signal):
-	urllib2.Request('localhost:5000/update_speed', { 'speed' : signal})
+	data = {'speed' : signal}
+        encoded = urllib.urlencode(data)
+	req = urllib2.Request('http://localhost:5000/updatespeed')
+        req.add_data(encoded)
+        urllib2.urlopen(req)
 
-dispatcher.connect(handleSpeed, sender="speed")
+def run():
+	dispatcher.connect(handleSpeed, sender="speed")
 
-handleSpeed("", 5)
+if __name__=="__main__":
+        handleSpeed("", 5)

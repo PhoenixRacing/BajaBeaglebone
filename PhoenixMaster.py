@@ -38,7 +38,6 @@ if __name__=="__main__":
 	import dashAppNode
 	import hallNode
         PhoenixMaster(
-		dashAppNode.run ,
 		sendSpeed, 
 		hallNode.frontLeftHall.run, 
 		hallNode.frontRightHall.run
