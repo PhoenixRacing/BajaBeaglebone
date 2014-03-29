@@ -4,8 +4,6 @@ import datetime
 
 from flask import Flask, render_template, session, request
 from flask.ext.socketio import SocketIO, emit
-from flask import Flask
-from flask import render_template
 
 
 
@@ -93,7 +91,7 @@ def post_ptime():
 	prev_time = request.form['prev_time']
 	curr_time = request.form['curr_time']
 	app.update_time(prev_time, curr_time)
-	return 'yaaay\n'
+	return 'success\n'
 
 @app.route('/updatebrakethrottle', methods = ['POST'])
 def post_brake_throttle():
@@ -101,14 +99,14 @@ def post_brake_throttle():
 	brake = request.form['brake']
 	throttle = request.form['throttle']
 	app.update_brake_throttle(brake, throttle)
-	return 'success motherfucker\n'
+	return 'success\n'
 
 @app.route('/updatespinlock', methods = ['POST'])
 def post_spin_lock():
 	spin = request.form['spin']
 	lock = request.form['lock']
 	app.update_spin_lock(spin, lock)
-	return 'I know you want this d\n'
+	return 'success\n'
 
 
 
@@ -130,10 +128,9 @@ def run_spin_lock():
 
 
 if __name__ == '__main__':
-        import sys
-        try:
-                from PhoenixMaster import PhoenixMaster
-        except:
-                sys.path.append('../')
-                from PhoenixMaster import PhoenixMaster
-        PhoenixMaster(run, run_update_speed, run_update_time, run_brake_throttle, run_spin_lock)
+		import sys
+
+		sys.path.append('../')
+		from PhoenixMaster import PhoenixMaster
+		PhoenixMaster([run, run_update_speed, run_update_time, run_brake_throttle, run_spin_lock])
+
