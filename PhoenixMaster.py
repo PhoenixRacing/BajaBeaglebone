@@ -7,12 +7,10 @@ These all die when the main thread is interrupted
 Intended to be master script for starting pubsub nodes """
 class PhoenixMaster(object):
 
-	def __init__(self, process=None, *nodes):
+	def __init__(self, *nodes):
 		self.nodes = []
 		for node in nodes:
 			self.addNode(node)
-		if process:
-			self.addProcess(process)
 		self.run()
 
 	def addProcess(self, no):
@@ -40,7 +38,7 @@ if __name__=="__main__":
 	import dashAppNode
 	import hallNode
         PhoenixMaster(
-#		dashAppNode.run, 
+		dashAppNode.run ,
 		sendSpeed, 
 		hallNode.frontLeftHall.run, 
 		hallNode.frontRightHall.run
