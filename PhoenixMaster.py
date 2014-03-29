@@ -21,7 +21,6 @@ class PhoenixMaster(object):
 	def addNode(self, node):
 		thread = threading.Thread(target=node)
 		thread.daemon = True
-		print thread
                 thread.start()
 		
 	def run(self):

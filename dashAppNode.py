@@ -8,7 +8,10 @@ def handleSpeed(sender, signal):
         encoded = urllib.urlencode(data)
 	req = urllib2.Request('http://localhost:5000/updatespeed')
         req.add_data(encoded)
-        urllib2.urlopen(req)
+	try:
+	        urllib2.urlopen(req)
+	except:
+		print 'Request failed. Dashboard might not be spun up'
 
 def run():
 	dispatcher.connect(handleSpeed, sender="speed")
