@@ -9,10 +9,10 @@ Intended to be master script for starting pubsub nodes """
 class PhoenixMaster(object):
 
 	def __init__(self, thread_nodes, process_nodes=[]):
-                for process_node in process_nodes:
-                        self.startProcess(process_node)
 		for thread_node in thread_nodes:
 			self.addNode(thread_node)
+                for process_node in process_nodes:
+                        self.startProcess(process_node)
 		self.run()
 
 	def startProcess(self, process_node):
@@ -21,6 +21,7 @@ class PhoenixMaster(object):
 	def addNode(self, node):
 		thread = threading.Thread(target=node)
 		thread.daemon = True
+		print thread
                 thread.start()
 		
 	def run(self):

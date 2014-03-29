@@ -4,6 +4,7 @@ import urllib
 
 def handleSpeed(sender, signal):
 	data = {'speed' : signal}
+	print data
         encoded = urllib.urlencode(data)
 	req = urllib2.Request('http://localhost:5000/updatespeed')
         req.add_data(encoded)
