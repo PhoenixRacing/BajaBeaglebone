@@ -4,10 +4,13 @@ import urllib
 
 def handleSpeed(sender, signal):
 	data = {'speed' : signal}
-	print data
-	print urllib2.Request('localhost:5000/update_speed', urllib.urlencode(data))
+        encoded = urllib.urlencode(data)
+	req = urllib2.Request('http://localhost:5000/updatespeed')
+        req.add_data(encoded)
+        urllib2.urlopen(req)
 
 def run():
 	dispatcher.connect(handleSpeed, sender="speed")
 
-handleSpeed("", 5)
+if __name__=="__main__":
+        handleSpeed("", 5)
