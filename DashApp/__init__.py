@@ -11,9 +11,27 @@ class DashApp(Flask):
 	def __init__(self):
 		super(self.__class__, self).__init__(__name__)
 		self.speed = 0
+		self.ptime = datetime.datetime.now()
+		self.ctime = datetime.datetime.now()
+		self.brake = 0
+		self.throttle = 0
+		self.spin = 0
+		self.lock = 0
 
 	def update_speed(self, speed):
 		self.speed = speed
+
+	def update_time(self, ptime, ctime):
+		self.ptime = ptime
+		self.ctime = ctime
+
+	def update_brake_throttle(self, brake, throttle):
+		self.brake = brake
+		self.throttle = throttle
+
+	def update_spin_lock(self, spin, lock):
+		self.spin = spin
+		self.lock = lock
 
 
 app = DashApp()
@@ -33,43 +51,27 @@ def index():
 def competition():
 	return render_template('test_dash.html', speed = 0)
 
+
 @socketio.on('update', namespace='/test')
 def test_message(message):
 	emit('updateSpeed', {'speed': app.speed })
 
-format = '%M:%S';
-
-@socketio.on('update ptime', namespace='/test')
-def test_ptime(message):
+@socketio.on('update time', namespace='/test')
+def get_time(message):
+	format = '%M:%S';
 	prev_t = datetime.datetime.now();
-	emit('updatePtime', {'prev': str(prev_t.strftime(format))})
-
-@socketio.on('current time', namespace='/test')
-def test_ctime(message):
 	curr_t = datetime.datetime.now();
-	emit('updateCtime', {'curr': str(curr_t.strftime(format))})
+	emit('updateTime', {'prev':str(app.ptime.strftime(format)), 'curr': str(app.ctime.strftime(format))})
 
-@socketio.on('update brake', namespace='/test')
-#Assuming potentiometer value between 0 and 1
-def test_brake(message):
-	pot_value = float(random.randint(0,100))/(100);
-	emit('updateBrake', {'brake': pot_value})
 
-@socketio.on('update throttle', namespace='/test')
-#Assuming potentiometer value between 0 and 1
-def test_throttle(message):
-	pot_value = float(random.randint(0,100))/(100);
-	emit('updateThrottle', {'throttle': pot_value})
+@socketio.on('update brake_throttle', namespace='/test')
+def brake_and_throttle(message):
+	emit('updateBrakeThrottle', {'brake': app.brake, 'throttle': app.throttle})
 
-@socketio.on('update spin', namespace='/test')
-def test_spin(message):
-	s = 1;
-	emit('updateSpin', {'spin': s})
+@socketio.on('update spin_lock', namespace='/test')
+def spin_or_lock(message):
+	emit('updateSL', {'spin': app.spin, 'lock': app.lock})
 
-@socketio.on('update lock', namespace='/test')
-def test_lock(message):
-	l = 1;
-	emit('updateLock', {'lock': l})
 
 def run():
         socketio.run(app)
@@ -77,10 +79,32 @@ def run():
 def run_update_speed():
 	while(True):
 		app.update_speed(random.randint(1,25))
-		time.sleep(1)
+		time.sleep(.001)
+
+def run_update_time():
+	while(True):
+		p_time = datetime.datetime.now();
+		c_time = datetime.datetime.now();
+		app.update_time(p_time, c_time)
+		time.sleep(.001)
+
+def run_brake_throttle():
+	while(True):
+		b = float(random.randint(0,100))/(100);
+		t = float(random.randint(0,100))/(100);
+		app.update_brake_throttle(b, t)
+		time.sleep(.001)
+
+def run_spin_lock():
+	while (True):
+		s = 1;
+		l = 1;
+		app.update_spin_lock(s, l)
+		time.sleep(.001)
+
 
 if __name__ == '__main__':
         import sys
         sys.path.append('../')
-        from PhoenixMaster import *
-        PhoenixMaster(run, run_update_speed)
+        from PhoenixMaster import PhoenixMaster
+        PhoenixMaster(run, run_update_speed, run_update_time, run_brake_throttle, run_spin_lock)
