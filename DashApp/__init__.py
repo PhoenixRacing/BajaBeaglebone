@@ -13,8 +13,8 @@ class Dashboard(Flask):
 	def __init__(self):
 		super(self.__class__, self).__init__(__name__)
 		self.speed = 0
-		self.ptime = datetime.datetime.now()
-		self.ctime = datetime.datetime.now()
+		self.ptime = 0
+		self.ctime = 0
 		self.brake = 0
 		self.throttle = 0
 		self.spin = 0
@@ -53,12 +53,25 @@ def index():
 def competition():
 	return render_template('test_dash.html', speed = 0)
 
+
+#Post requests stuff...
+#debug using: curl --data "speed=5" localhost:5000/updatespeed
 @app.route('/updatespeed', methods = ['POST'])
-def update_speed():
+def post_speed():
 	speed = request.form['speed']
 	app.update_speed(speed)
-	return 'fart'
+	return 'success'
 
+@app.route('/updatetime', methods = ['POST'])
+#TODO: make this work with datetime objects
+def post_ptime():
+	prev_time = request.form['prev_time']
+	curr_time = request.form['curr_time']
+	app.update_time(prev_time, curr_time)
+	return 'success'
+
+
+#Sockets stuff...
 
 @socketio.on('update', namespace='/test')
 def test_message(message):
@@ -67,9 +80,9 @@ def test_message(message):
 @socketio.on('update time', namespace='/test')
 def get_time(message):
 	format = '%M:%S';
-	prev_t = datetime.datetime.now();
-	curr_t = datetime.datetime.now();
-	emit('updateTime', {'prev':str(app.ptime.strftime(format)), 'curr': str(app.ctime.strftime(format))})
+	prev_t = '00:00';
+	curr_t = '00:00';
+	emit('updateTime', {'prev':app.ptime, 'curr': app.ctime})
 
 
 @socketio.on('update brake_throttle', namespace='/test')
@@ -85,16 +98,10 @@ def run():
         socketio.run(app)
 
 def run_update_speed():
-	while(True):
-		#app.update_speed(random.randint(1,25))
-		time.sleep(.001)
+	pass
 
 def run_update_time():
-	while(True):
-		p_time = datetime.datetime.now();
-		c_time = datetime.datetime.now();
-		app.update_time(p_time, c_time)
-		time.sleep(.001)
+	pass
 
 def run_brake_throttle():
 	while(True):
