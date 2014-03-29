@@ -1,5 +1,6 @@
 import time
 import threading
+import subprocess
 import sys
 
 """ Starts each program as a separate Python thread
@@ -7,23 +8,22 @@ These all die when the main thread is interrupted
 Intended to be master script for starting pubsub nodes """
 class PhoenixMaster(object):
 
-	def __init__(self, *nodes):
-		self.nodes = []
-		for node in nodes:
-			self.addNode(node)
+	def __init__(self, thread_nodes, process_nodes=[]):
+		for thread_node in thread_nodes:
+			self.addNode(thread_node)
+                for process_node in process_nodes:
+                        self.startProcess(process_node)
 		self.run()
 
-	def addProcess(self, no):
-		return
+	def startProcess(self, process_node):
+		subprocess.call(process_node)
 
 	def addNode(self, node):
 		thread = threading.Thread(target=node)
 		thread.daemon = True
-		self.nodes.append(thread)
+                thread.start()
 		
 	def run(self):
-		for node in self.nodes:
-			node.start()
 		self.killOnInterrupt()
 
 	def killOnInterrupt(self):
@@ -37,9 +37,10 @@ if __name__=="__main__":
 	from dummySpeedPub import sendSpeed
 	import dashAppNode
 #	import hallNode
-        PhoenixMaster(
-		sendSpeed, 
+        PhoenixMaster([
+                sendSpeed, 
                 dashAppNode.run,
 #		hallNode.frontLeftHall.run, 
 #		hallNode.frontRightHall.run
+                ], process_nodes = ['python dashAppHelper.py']
 	)
