@@ -36,9 +36,10 @@ class PhoenixMaster(object):
 if __name__=="__main__":
 	from dummySpeedPub import sendSpeed
 	import dashAppNode
-	import hallNode
+#	import hallNode
         PhoenixMaster(
 		sendSpeed, 
-		hallNode.frontLeftHall.run, 
-		hallNode.frontRightHall.run
+                dashAppNode.run,
+#		hallNode.frontLeftHall.run, 
+#		hallNode.frontRightHall.run
 	)
