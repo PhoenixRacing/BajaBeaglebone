@@ -2,12 +2,14 @@ import random
 import time
 import datetime
 
-from flask import Flask, render_template, session
+from flask import Flask, render_template, session, request
 from flask.ext.socketio import SocketIO, emit
 from flask import Flask
 from flask import render_template
 
-class DashApp(Flask):
+
+
+class Dashboard(Flask):
 	def __init__(self):
 		super(self.__class__, self).__init__(__name__)
 		self.speed = 0
@@ -34,7 +36,7 @@ class DashApp(Flask):
 		self.lock = lock
 
 
-app = DashApp()
+app = Dashboard() 
 app.debug=True
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
@@ -50,6 +52,12 @@ def index():
 @app.route('/test_dash')
 def competition():
 	return render_template('test_dash.html', speed = 0)
+
+@app.route('/updatespeed', methods = ['POST'])
+def update_speed():
+	speed = request.form['speed']
+	app.update_speed(speed)
+	return 'fart'
 
 
 @socketio.on('update', namespace='/test')
@@ -78,7 +86,7 @@ def run():
 
 def run_update_speed():
 	while(True):
-		app.update_speed(random.randint(1,25))
+		#app.update_speed(random.randint(1,25))
 		time.sleep(.001)
 
 def run_update_time():
