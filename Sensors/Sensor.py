@@ -3,13 +3,17 @@ from collections import deque
 """Abstract class for sensors on Baja car"""
 class Sensor(object):
 
-	def __init__(self, pins, numPoints):
+	def __init__(self, pins, numPoints, name):
 		self.pins = pins
 		self.memory = deque(maxlen=numPoints)
 		self.val = None
+		self.name = name
 
 	def clearMemory(self):
 		self.memory.clear()
+
+	def getName(self):
+		return self.name
 
 	def setSensorVal(self, val):
 		self.val = val
@@ -49,4 +53,4 @@ class Sensor(object):
 		print self
 
 	def __repr__(self):
-		return "Sensor: %s \t Val: %.3f \t Num Points: %d \t Pins: %s"%(type(self).__name__, self.getSensorVal(), len(self.memory), self.pins) 
+		return "Sensor: %s \t Val: %.3f \t Num Points: %d \t Pins: %s"%(self.name, self.getSensorVal(), len(self.memory), self.pins) 

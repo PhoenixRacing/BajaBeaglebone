@@ -33,5 +33,5 @@ class PhoenixMaster(object):
 if __name__=="__main__":
 	from dummySpeedPub import sendSpeed
 	import dashAppNode
-	import sensorNode
-        PhoenixMaster(dashAppNode.run, sendSpeed, sensorNode.frontLeftHall.run)
+	import hallNode
+        PhoenixMaster(dashAppNode.run, sendSpeed, hallNode.frontLeftHall.run)

@@ -4,8 +4,8 @@ import Adafruit_BBIO.GPIO as GPIO
 
 class EdgeDetector(Sensor):
 
-	def __init__(self, pins, magnets, numPoints=10, timeout=1):
-		super(self.__class__, self).__init__(pins, numPoints)
+	def __init__(self, pins, magnets, name, numPoints=10, timeout=1):
+		super(self.__class__, self).__init__(pins, numPoints, name)
 		GPIO.setup(pins[0], GPIO.IN)
 		self.magnets = magnets
 		self.lastEdge = None
@@ -47,5 +47,5 @@ class EdgeDetector(Sensor):
 			
 
 if __name__=='__main__':
-	h = EdgeDetector(["P8_10"], 1, numPoints=5, timeout=1)
+	h = EdgeDetector(["P8_10"], 1, "hall", numPoints=5, timeout=1)
 	h.run()
