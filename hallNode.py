@@ -23,9 +23,10 @@ backRightHall.setPublishFunc(publishBackRightHall)
 
 if __name__=="__main__":
 	from PhoenixMaster import PhoenixMaster
-	PhoenixMaster(
+	PhoenixMaster([
 		backRightHall.run,
 		frontRightHall.run,
 		backLeftHall.run,
 		frontLeftHall.run
+		]
 		)

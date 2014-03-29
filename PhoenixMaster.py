@@ -9,14 +9,14 @@ Intended to be master script for starting pubsub nodes """
 class PhoenixMaster(object):
 
 	def __init__(self, thread_nodes, process_nodes=[]):
-		for thread_node in thread_nodes:
-			self.addNode(thread_node)
                 for process_node in process_nodes:
                         self.startProcess(process_node)
+		for thread_node in thread_nodes:
+			self.addNode(thread_node)
 		self.run()
 
 	def startProcess(self, process_node):
-		subprocess.call(process_node)
+		subprocess.call(process_node, shell=True)
 
 	def addNode(self, node):
 		thread = threading.Thread(target=node)
@@ -36,11 +36,11 @@ class PhoenixMaster(object):
 if __name__=="__main__":
 	from dummySpeedPub import sendSpeed
 	import dashAppNode
-#	import hallNode
+	import hallNode
         PhoenixMaster([
                 sendSpeed, 
                 dashAppNode.run,
-#		hallNode.frontLeftHall.run, 
-#		hallNode.frontRightHall.run
-                ], process_nodes = ['python dashAppHelper.py']
+		hallNode.frontLeftHall.run, 
+		hallNode.frontRightHall.run,
+                ], ['python dashAppHelper.py']
 	)
