@@ -133,4 +133,4 @@ if __name__ == '__main__':
         import sys
         sys.path.append('../')
         from PhoenixMaster import PhoenixMaster
-        PhoenixMaster(run, run_update_speed, run_update_time, run_brake_throttle, run_spin_lock)
+        PhoenixMaster(run)
