@@ -54,24 +54,8 @@ def competition():
 	return render_template('test_dash.html', speed = 0)
 
 
-#Post requests stuff...
-#debug using: curl --data "speed=5" localhost:5000/updatespeed
-@app.route('/updatespeed', methods = ['POST'])
-def post_speed():
-	speed = request.form['speed']
-	app.update_speed(speed)
-	return 'success'
 
-@app.route('/updatetime', methods = ['POST'])
-#TODO: make this work with datetime objects
-def post_ptime():
-	prev_time = request.form['prev_time']
-	curr_time = request.form['curr_time']
-	app.update_time(prev_time, curr_time)
-	return 'success'
-
-
-#Sockets stuff...
+###Sockets stuff...
 
 @socketio.on('update', namespace='/test')
 def test_message(message):
@@ -84,7 +68,6 @@ def get_time(message):
 	curr_t = '00:00';
 	emit('updateTime', {'prev':app.ptime, 'curr': app.ctime})
 
-
 @socketio.on('update brake_throttle', namespace='/test')
 def brake_and_throttle(message):
 	emit('updateBrakeThrottle', {'brake': app.brake, 'throttle': app.throttle})
@@ -92,6 +75,42 @@ def brake_and_throttle(message):
 @socketio.on('update spin_lock', namespace='/test')
 def spin_or_lock(message):
 	emit('updateSL', {'spin': app.spin, 'lock': app.lock})
+
+
+
+###Post requests stuff...
+
+#debug using: curl --data "speed=5" localhost:5000/updatespeed
+@app.route('/updatespeed', methods = ['POST'])
+def post_speed():
+	speed = request.form['speed']
+	app.update_speed(speed)
+	return 'success\n'
+
+@app.route('/updatetime', methods = ['POST'])
+#TODO: make this work with datetime objects
+def post_ptime():
+	prev_time = request.form['prev_time']
+	curr_time = request.form['curr_time']
+	app.update_time(prev_time, curr_time)
+	return 'yaaay\n'
+
+@app.route('/updatebrakethrottle', methods = ['POST'])
+def post_brake_throttle():
+#assumes brake and throttle values are pot values between 0 and 1
+	brake = request.form['brake']
+	throttle = request.form['throttle']
+	app.update_brake_throttle(brake, throttle)
+	return 'success motherfucker\n'
+
+@app.route('/updatespinlock', methods = ['POST'])
+def post_spin_lock():
+	spin = request.form['spin']
+	lock = request.form['lock']
+	app.update_spin_lock(spin, lock)
+	return 'I know you want this d\n'
+
+
 
 
 def run():
@@ -104,18 +123,10 @@ def run_update_time():
 	pass
 
 def run_brake_throttle():
-	while(True):
-		b = float(random.randint(0,100))/(100);
-		t = float(random.randint(0,100))/(100);
-		app.update_brake_throttle(b, t)
-		time.sleep(.001)
+	pass
 
 def run_spin_lock():
-	while (True):
-		s = 1;
-		l = 1;
-		app.update_spin_lock(s, l)
-		time.sleep(.001)
+	pass
 
 
 if __name__ == '__main__':
