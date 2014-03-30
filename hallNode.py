@@ -2,7 +2,6 @@ from pydispatch import dispatcher
 from Sensors import EdgeDetector, Pot
 
 def publishSensorVal(hall):
-	print hall
 	dispatcher.send(signal=hall.getSensorVal(), sender=hall.getName())
 
 frontLeftHall = EdgeDetector(["P8_10"], 1, "frontLeftHall")
