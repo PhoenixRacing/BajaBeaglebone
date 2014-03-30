@@ -37,6 +37,7 @@ if __name__=="__main__":
 	import dummySpeedPub
 	import dashAppNode
 	import hallNode
+	import allNode
 	import loggerNode
         PhoenixMaster([
                 dummySpeedPub.sendSpeed, 
@@ -44,5 +45,6 @@ if __name__=="__main__":
 		hallNode.frontLeftHall.run, 
 		hallNode.frontRightHall.run,
 		loggerNode.run,
+		allNode.run,
                 ], ['python dashAppHelper.py']
 	)
