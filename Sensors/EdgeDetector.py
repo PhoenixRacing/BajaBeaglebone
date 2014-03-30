@@ -12,9 +12,12 @@ class EdgeDetector(Sensor):
 		self.currentEdge = time.time()
 		self.timeout = timeout
 
-	def risingEdge(self):
-		self.setNewEdge()
-		self.updateRPM()
+	def edgeDetected(self):
+		if self.lastEdge:
+			self.setNewEdge()
+			self.updateRPM()
+		else:
+			self.setNewEdge()
 		self.publish() #CRUCIAL
 
 	def setNewEdge(self):
@@ -29,6 +32,8 @@ class EdgeDetector(Sensor):
 		return 1 / ((self.currentEdge - self.lastEdge) * self.magnets) * 60.0
 
 	def setZero(self):
+		self.lastEdge = None
+		self.currentEdge = time.time()
 		self.clearMemory()	#dont want this to be swallowed
 		self.setSensorVal(0)
 
@@ -36,15 +41,10 @@ class EdgeDetector(Sensor):
 		GPIO.add_event_detect(self.pins[0], GPIO.RISING)
 		while True:
 			if GPIO.event_detected(self.pins[0]):
-				self.risingEdge()
-				self.publish()
+				self.edgeDetected()
 			if time.time() - self.currentEdge > self.timeout:
 				self.setZero()
-				self.setNewEdge()
 				self.publish()
-
-
-			
 
 if __name__=='__main__':
 	h = EdgeDetector(["P8_10"], 1, "hall", numPoints=5, timeout=1)
