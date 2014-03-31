@@ -47,5 +47,5 @@ class EdgeDetector(Sensor):
 				self.publish()
 
 if __name__=='__main__':
-	h = EdgeDetector(["P8_10"], 1, "hall", numPoints=5, timeout=1)
+	h = EdgeDetector(["P8_13"], 1, "hall", numPoints=5, timeout=1)
 	h.run()

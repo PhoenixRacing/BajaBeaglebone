@@ -4,19 +4,19 @@ from Sensors import EdgeDetector, Pot
 def publishSensorVal(hall):
 	dispatcher.send(signal=hall.getSensorVal(), sender=hall.getName())
 
-frontLeftHall = EdgeDetector(["P8_10"], 1, "frontLeftHall")
+frontLeftHall = EdgeDetector(["P8_13"], 1, "frontLeftHall")
 def publishFrontLeftHall(): publishSensorVal(frontLeftHall)
 frontLeftHall.setPublishFunc(publishFrontLeftHall)
 
-frontRightHall = EdgeDetector(["P8_11"], 1, "frontRightHall")
+frontRightHall = EdgeDetector(["P8_12"], 1, "frontRightHall")
 def publishFrontRightHall(): publishSensorVal(frontRightHall)
 frontRightHall.setPublishFunc(publishFrontRightHall)
 
-backLeftHall = EdgeDetector(["P8_12"], 1, "backLeftHall")
+backLeftHall = EdgeDetector(["P8_11"], 1, "backLeftHall")
 def publishBackLeftHall(): publishSensorVal(backLeftHall)
 backLeftHall.setPublishFunc(publishBackLeftHall)
 
-backRightHall = EdgeDetector(["P8_13"], 1, "backRightHall")
+backRightHall = EdgeDetector(["P8_10"], 1, "backRightHall")
 def publishBackRightHall(): publishSensorVal(backRightHall)
 backRightHall.setPublishFunc(publishBackRightHall)
 

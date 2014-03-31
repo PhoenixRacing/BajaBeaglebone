@@ -34,17 +34,23 @@ class PhoenixMaster(object):
 			sys.exit()
 
 if __name__=="__main__":
-	import dummySpeedPub
 	import dashAppNode
 	import hallNode
 	import allNode
 	import loggerNode
+	import lockNode
+	import speedNode
+	import dummySpeedNode
         PhoenixMaster([
-                dummySpeedPub.sendSpeed, 
                 dashAppNode.run,
+#		dummySpeedNode.run,
 		hallNode.frontLeftHall.run, 
 		hallNode.frontRightHall.run,
+		hallNode.backLeftHall.run,
+		hallNode.backRightHall.run,
 		loggerNode.run,
 		allNode.run,
+		lockNode.run,
+		speedNode.run,
                 ], ['python dashAppHelper.py']
 	)
