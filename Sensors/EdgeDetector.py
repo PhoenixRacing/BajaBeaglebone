@@ -45,7 +45,6 @@ class EdgeDetector(Sensor):
 			if time.time() - self.currentEdge > self.timeout:
 				self.setZero()
 				self.publish()
-			time.sleep(.001)
 
 if __name__=='__main__':
 	h = EdgeDetector(["P8_12"], 1, "hall", numPoints=5, timeout=5)

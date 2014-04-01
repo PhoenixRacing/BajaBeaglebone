@@ -10,10 +10,11 @@ class Pot(Sensor):
 
 	def run(self):
 		while True:
+			print GPIO.input("P8_11")
 			self.measureProcessAndSet(GPIO.input(self.pins[0]), 'average')
 			self.publish()
 			time.sleep(.01)
 
 if __name__=="__main__":
-	p = Pot(["P8_10"], "pot")
+	p = Pot(["P8_11"], "pot")
 	p.run()
