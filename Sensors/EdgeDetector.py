@@ -26,7 +26,7 @@ class EdgeDetector(Sensor):
 
 	def updateRPM(self):
 		self.addToMemory(self.calculateRPM())
-		self.setSensorVal(self.processMemory('median'))
+		self.setSensorVal(self.processMemory('average'))
 
 	def calculateRPM(self):
 		return 1 / ((self.currentEdge - self.lastEdge) * self.magnets) * 60.0
@@ -45,7 +45,8 @@ class EdgeDetector(Sensor):
 			if time.time() - self.currentEdge > self.timeout:
 				self.setZero()
 				self.publish()
+			time.sleep(.001)
 
 if __name__=='__main__':
-	h = EdgeDetector(["P8_13"], 1, "hall", numPoints=5, timeout=1)
+	h = EdgeDetector(["P8_12"], 1, "hall", numPoints=5, timeout=5)
 	h.run()

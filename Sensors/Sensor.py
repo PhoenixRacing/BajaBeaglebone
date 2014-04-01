@@ -6,7 +6,7 @@ class Sensor(object):
 	def __init__(self, pins, numPoints, name):
 		self.pins = pins
 		self.memory = deque(maxlen=numPoints)
-		self.val = None
+		self.val = 0
 		self.name = name
 
 	def clearMemory(self):
