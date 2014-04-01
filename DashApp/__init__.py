@@ -57,7 +57,7 @@ def competition():
 
 @socketio.on('update', namespace='/test')
 def test_message(message):
-	emit('updateSpeed', {'speed': app.speed })
+	emit('updateSpeed', {'speed': int(app.speed) })
 
 @socketio.on('update time', namespace='/test')
 def get_time(message):
