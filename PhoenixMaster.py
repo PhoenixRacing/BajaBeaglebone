@@ -52,6 +52,5 @@ if __name__=="__main__":
 		allNode.run,
 		lockNode.run,
 		speedNode.run,
-                ], 
-#		['python dashAppHelper.py']
+                ], ['python dashAppHelper.py']
 	)
