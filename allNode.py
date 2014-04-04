@@ -9,6 +9,7 @@ vals = {}
 def pubAll(sender, signal):
 	if sender==nodeName:
 		return
+	print sender, signal	
 	vals[sender] = signal
 
 def stringify(dic):

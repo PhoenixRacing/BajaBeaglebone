@@ -47,14 +47,8 @@ $(document).ready(function(){
 
     //Display an L if wheel lock, an S if wheel spin
     socket.on('updateSL', function(msg) {
-        var spin = msg.spin;
-        if (spin) {
-            $(".upper_left").css("color", "#D80000");
-        }
-        var lock = msg.lock;
-        if (lock) {
-            $(".upper_right").css("color", "#D80000");
-        }
+        $('#spin').html('<strong>' + msg.spin + '</strong>');
+        $('#lock').html('<strong>' + msg.lock + '</strong>');
     })
     setInterval(getSpinLock, 200);
     function getSpinLock() {
