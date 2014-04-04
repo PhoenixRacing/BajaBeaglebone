@@ -2,21 +2,22 @@ from pydispatch import dispatcher
 from Sensors import EdgeDetector, Pot
 
 def publishSensorVal(hall):
+	print hall
 	dispatcher.send(signal=hall.getSensorVal(), sender=hall.getName())
 
-frontLeftHall = EdgeDetector(["P8_13"], 1, "frontLeftHall")
+frontLeftHall = EdgeDetector(["P9_11"], 1, "frontLeftHall")
 def publishFrontLeftHall(): publishSensorVal(frontLeftHall)
 frontLeftHall.setPublishFunc(publishFrontLeftHall)
 
-frontRightHall = EdgeDetector(["P8_12"], 1, "frontRightHall")
+frontRightHall = EdgeDetector(["P9_12"], 1, "frontRightHall")
 def publishFrontRightHall(): publishSensorVal(frontRightHall)
 frontRightHall.setPublishFunc(publishFrontRightHall)
 
-backLeftHall = EdgeDetector(["P8_11"], 1, "backLeftHall")
+backLeftHall = EdgeDetector(["P9_13"], 1, "backLeftHall")
 def publishBackLeftHall(): publishSensorVal(backLeftHall)
 backLeftHall.setPublishFunc(publishBackLeftHall)
 
-backRightHall = EdgeDetector(["P8_10"], 1, "backRightHall")
+backRightHall = EdgeDetector(["P9_21"], 1, "backRightHall")
 def publishBackRightHall(): publishSensorVal(backRightHall)
 backRightHall.setPublishFunc(publishBackRightHall)
 
