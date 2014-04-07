@@ -45,7 +45,7 @@ if __name__=="__main__":
         PhoenixMaster([
                 dashAppNode.run,
 		dummySpeedNode.run,
-		dummyLockNode.run,
+		#dummyLockNode.run,
 		gpioNode.frontLeftHall.run, 
 		gpioNode.frontRightHall.run,
 		gpioNode.backLeftHall.run,
@@ -54,7 +54,7 @@ if __name__=="__main__":
 		gpioNode.brakePot.run,
 		loggerNode.run,
 		allNode.run,
-		#lockNode.run,
+		lockNode.run,
 	#	speedNode.run,
                 ], ['python dashAppHelper.py']
 	)

@@ -4,7 +4,7 @@ import Adafruit_BBIO.ADC as ADC
 
 class Pot(Sensor):
 
-	def __init__(self, pins, name, numPoints=10, delay=.1):
+	def __init__(self, pins, name, numPoints=5, delay=.05):
 		super(self.__class__, self).__init__(pins, numPoints, name)
 		ADC.setup()
 		self.delay = delay
