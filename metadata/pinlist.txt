@@ -4,3 +4,5 @@ P9_12	GPIO	Yes	frontRightHall
 P9_13	GPIO	Yes	backLeftHall
 P9_21	GPIO	Yes	backRightHall
 P8_10	GPIO	Yes	
+P9_39	ADC	Yes	Throttle Pot
+P9_40	ADC	Yes	Brake Pot

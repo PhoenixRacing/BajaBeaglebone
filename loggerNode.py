@@ -1,8 +1,9 @@
 from pydispatch import dispatcher
-import sys
+import pprint
+import json
 
 def logAll(sender, signal):
-	print signal
+	pprint.pprint(json.loads(signal))
 
 def run():
 	dispatcher.connect(logAll, sender="allNode")

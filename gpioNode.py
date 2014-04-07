@@ -1,8 +1,8 @@
 from pydispatch import dispatcher
 from Sensors import EdgeDetector, Pot
 
-def publishSensorVal(hall):
-	dispatcher.send(signal=hall.getSensorVal(), sender=hall.getName())
+def publishSensorVal(sensor):
+	dispatcher.send(signal=sensor.getSensorVal(), sender=sensor.getName())
 
 frontLeftHall = EdgeDetector(["P9_11"], 1, "frontLeftHall")
 def publishFrontLeftHall(): publishSensorVal(frontLeftHall)
@@ -20,12 +20,21 @@ backRightHall = EdgeDetector(["P9_21"], 1, "backRightHall")
 def publishBackRightHall(): publishSensorVal(backRightHall)
 backRightHall.setPublishFunc(publishBackRightHall)
 
+brakePot = Pot(["P9_40"], "brakePot")
+def publishBrakePot(): publishSensorVal(brakePot)
+brakePot.setPublishFunc(publishBrakePot)
+
+throttlePot = Pot(["P9_39"], "throttlePot")
+def publishThrottlePot(): publishSensorVal(throttlePot)
+throttlePot.setPublishFunc(publishThrottlePot)
+
 if __name__=="__main__":
 	from PhoenixMaster import PhoenixMaster
 	PhoenixMaster([
 		backRightHall.run,
 		frontRightHall.run,
 		backLeftHall.run,
-		frontLeftHall.run
-		]
-		)
+		frontLeftHall.run,
+		brakePot.run,
+		throttlePot.run,
+	])

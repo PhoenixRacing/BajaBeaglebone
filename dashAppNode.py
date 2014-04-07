@@ -15,7 +15,6 @@ def handleSpeed(sender, signal):
 
 def handleLockSpin(sender, signal):
 	data = {'spin': signal, 'lock': signal}
-	print "got lock and spin"
 	encoded = urllib.urlencode(data)
 	req = urllib2.Request('http://localhost:5000/updatespinlock')
 	req.add_data(encoded)

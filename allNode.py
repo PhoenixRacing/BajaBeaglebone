@@ -9,7 +9,6 @@ vals = {}
 def pubAll(sender, signal):
 	if sender==nodeName:
 		return
-	print sender, signal	
 	vals[sender] = signal
 
 def stringify(dic):
@@ -20,4 +19,4 @@ def run():
 	dispatcher.connect(pubAll, sender=dispatcher.Any)
 	while True:
 		dispatcher.send(signal=stringify(vals), sender=nodeName)
-		time.sleep(.1)
+		time.sleep(1)
