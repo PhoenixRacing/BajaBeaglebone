@@ -3,7 +3,6 @@ from Sensors.EdgeDetector import EdgeDetector
 from Sensors.Pot import Pot
 
 def publishSensorVal(sensor):
-	print sensor
 	dispatcher.send(signal=sensor.getSensorVal(), sender=sensor.getName())
 
 frontLeftHall = EdgeDetector(["P9_11"], 1, "frontLeftHall")
