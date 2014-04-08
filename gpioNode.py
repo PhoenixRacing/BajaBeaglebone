@@ -1,5 +1,6 @@
 from pydispatch import dispatcher
-from Sensors import EdgeDetector, Pot
+from Sensors.EdgeDetector import EdgeDetector
+from Sensors.Pot import Pot
 
 def publishSensorVal(sensor):
 	dispatcher.send(signal=sensor.getSensorVal(), sender=sensor.getName())
