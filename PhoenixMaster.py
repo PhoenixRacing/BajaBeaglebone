@@ -35,7 +35,7 @@ class PhoenixMaster(object):
 
 if __name__=="__main__":
 	import dashAppNode
-	import gpioNode
+	#import gpioNode
 	import allNode
 	import loggerNode
 	import lockNode
@@ -45,16 +45,16 @@ if __name__=="__main__":
         PhoenixMaster([
                 dashAppNode.run,
 		dummySpeedNode.run,
-		#dummyLockNode.run,
-		gpioNode.frontLeftHall.run, 
-		gpioNode.frontRightHall.run,
-		gpioNode.backLeftHall.run,
-		gpioNode.backRightHall.run,
-		gpioNode.throttlePot.run,
-		gpioNode.brakePot.run,
+		dummyLockNode.run,
+		# gpioNode.frontLeftHall.run, 
+		# gpioNode.frontRightHall.run,
+		# gpioNode.backLeftHall.run,
+		# gpioNode.backRightHall.run,
+		# gpioNode.throttlePot.run,
+		# gpioNode.brakePot.run, 
 		loggerNode.run,
 		allNode.run,
-		lockNode.run,
+	#	lockNode.run,
 	#	speedNode.run,
                 ], ['python dashAppHelper.py']
 	)

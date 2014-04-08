@@ -2,7 +2,6 @@ from pydispatch import dispatcher
 import urllib2
 import urllib
 from random import randint
-import json
 
 def handleSpeed(sender, signal):
 	data = {'speed' : signal}
@@ -15,10 +14,7 @@ def handleSpeed(sender, signal):
 		print 'Request failed. Dashboard might not be spun up'
 
 def handleLockSpin(sender, signal):
-	sig = json.loads(signal)
-	spin = sig.get('spin')
-	lock = sig.get('lock')
-	data = {'spin': spin, 'lock': lock}
+	data = {'spin': signal, 'lock': signal}
 	encoded = urllib.urlencode(data)
 	req = urllib2.Request('http://localhost:5000/updatespinlock')
 	req.add_data(encoded)
