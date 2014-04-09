@@ -29,9 +29,10 @@ class Dashboard(Flask):
 		self.brake = brake
 		self.throttle = throttle
 
-	def update_spin_lock(self, spin, lock):
-		self.spin = spin
+	def update_spin_lock(self, lock, spin):
 		self.lock = lock
+		self.spin = spin
+
 
 
 app = Dashboard() 
@@ -103,9 +104,9 @@ def post_brake_throttle():
 
 @app.route('/updatespinlock', methods = ['POST'])
 def post_spin_lock():
-	spin = request.form['spin']
 	lock = request.form['lock']
-	app.update_spin_lock(spin, lock)
+	spin = request.form['spin']
+	app.update_spin_lock(lock, spin)
 	return 'success\n'
 
 

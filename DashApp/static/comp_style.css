@@ -22,7 +22,7 @@ h1 {
 
 .upper_left {
 	font-size:7em;
-	color: #e0e0e0;
+	color: #D00000;
 	font-family:Arial;
 	position: absolute;
 	top: 40px;
@@ -31,7 +31,7 @@ h1 {
 
 .upper_right {
 	font-size: 7em;
-	color: #e0e0e0;
+	color: #D00000;
 	font-family:Arial;
 	position: absolute;
 	top: 40px;

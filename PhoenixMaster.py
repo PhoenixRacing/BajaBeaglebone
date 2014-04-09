@@ -16,7 +16,7 @@ class PhoenixMaster(object):
 		self.run()
 
 	def startProcess(self, process_node):
-		subprocess.call(process_node, shell=True)
+		subprocess.call(process_node, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 	def addNode(self, node):
 		thread = threading.Thread(target=node)
@@ -35,22 +35,28 @@ class PhoenixMaster(object):
 
 if __name__=="__main__":
 	import dashAppNode
-	import hallNode
+	#import gpioNode
 	import allNode
 	import loggerNode
 	import lockNode
-	import speedNode
+	#import speedNode
 	import dummySpeedNode
+	import dummyLockNode
+	import dummyBrakeThrNode
         PhoenixMaster([
                 dashAppNode.run,
-#		dummySpeedNode.run,
-		hallNode.frontLeftHall.run, 
-		hallNode.frontRightHall.run,
-		hallNode.backLeftHall.run,
-		hallNode.backRightHall.run,
+		dummySpeedNode.run,
+		dummyLockNode.run,
+		dummyBrakeThrNode.run,
+		# gpioNode.frontLeftHall.run, 
+		# gpioNode.frontRightHall.run,
+		# gpioNode.backLeftHall.run,
+		# gpioNode.backRightHall.run,
+		# gpioNode.throttlePot.run,
+		# gpioNode.brakePot.run, 
 		loggerNode.run,
 		allNode.run,
-		lockNode.run,
-		speedNode.run,
+	#	lockNode.run,
+	#	speedNode.run,
                 ], ['python dashAppHelper.py']
 	)

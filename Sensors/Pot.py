@@ -1,19 +1,21 @@
 from Sensor import *
 import time
-import Adafruit_BBIO.GPIO as GPIO
+import Adafruit_BBIO.ADC as ADC
 
 class Pot(Sensor):
 
-	def __init__(self, pins, name, numPoints=10):
+	def __init__(self, pins, name, numPoints=5, delay=.05):
 		super(self.__class__, self).__init__(pins, numPoints, name)
-		GPIO.setup(pins[0], GPIO.IN)
+		ADC.setup()
+		self.delay = delay
 
 	def run(self):
 		while True:
-			self.measureProcessAndSet(GPIO.input(self.pins[0]), 'average')
+			val = ADC.read(self.pins[0])
+			self.measureProcessAndSet(val, 'average')
+			time.sleep(self.delay)
 			self.publish()
-			time.sleep(.01)
 
 if __name__=="__main__":
-	p = Pot(["P8_10"], "pot")
+	p = Pot(["P9_39"], "pot")
 	p.run()
