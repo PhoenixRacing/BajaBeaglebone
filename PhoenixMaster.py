@@ -42,10 +42,12 @@ if __name__=="__main__":
 	#import speedNode
 	import dummySpeedNode
 	import dummyLockNode
+	import dummyBrakeThrNode
         PhoenixMaster([
                 dashAppNode.run,
 		dummySpeedNode.run,
 		dummyLockNode.run,
+		dummyBrakeThrNode.run,
 		# gpioNode.frontLeftHall.run, 
 		# gpioNode.frontRightHall.run,
 		# gpioNode.backLeftHall.run,
