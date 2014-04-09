@@ -11,7 +11,9 @@
 
 from time import sleep
 from termcolor import colored
+import subprocess
 
+subprocess.call("echo bmp085 0x77 > /sys/class/i2c-adapter/i2c-1/new_device", shell=True)
 print "setup: BMP085 ..."
 print "Press CTRL+C to stop"
 sleep(1.0)
