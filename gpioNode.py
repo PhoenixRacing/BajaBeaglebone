@@ -5,7 +5,7 @@ from Sensors.Pot import Pot
 sensors = [EdgeDetector(["P9_11"], 1, "frontLeftHall"),
            EdgeDetector(["P9_12"], 1, "frontRightHall"),
            EdgeDetector(["P9_13"], 1, "backLeftHall"),
-           EdgeDetector(["P9_21"], 1, "backRightHall"),
+           EdgeDetector(["P9_15"], 1, "backRightHall"),
            Pot(["P9_40"],"brakePot"),
            Pot(["P9_39"],"throttlePot")]
 

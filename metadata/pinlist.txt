@@ -2,7 +2,10 @@ Pin	Type	Working	Sensor
 P9_11	GPIO	Yes	frontLeftHall
 P9_12	GPIO	Yes	frontRightHall
 P9_13	GPIO	Yes	backLeftHall
-P9_21	GPIO	Yes	backRightHall
+P9_15	GPIO	Yes	backRightHall
 P8_10	GPIO	Yes	
+P8_8	GPIO	Yes
 P9_39	ADC	Yes	Throttle Pot
 P9_40	ADC	Yes	Brake Pot
+
+http://www.alexanderhiam.com/wp-content/uploads/2012/12/beaglebone_pinout.png
