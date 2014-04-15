@@ -22,7 +22,7 @@ class DataPoint(EmbeddedDocument):
 	backRightWheel = FloatField()
 
 class DataSession(Document):
-	driver = StringField(True)
+	driver = StringField()
 	start_time = DateTimeField(required = True)
 	end_time = DateTimeField()
 	data = ListField(EmbeddedDocumentField(DataPoint))
