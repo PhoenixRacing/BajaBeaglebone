@@ -53,4 +53,4 @@ class Sensor(object):
 		print self
 
 	def __repr__(self):
-		return "Sensor: %s \t Val: %.3f \t Num Points: %d \t Pins: %s"%(self.name, self.getSensorVal(), len(self.memory), self.pins) 
+		return "Sensor: %s \t Val: %s \t Num Points: %d \t Pins: %s"%(self.name, str(self.getSensorVal()), len(self.memory), self.pins) 
