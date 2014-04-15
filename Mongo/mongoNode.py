@@ -1,32 +1,9 @@
 from mongoengine import *
+from models import *
 from datetime import datetime
 from pydispatch import dispatcher
 import json
 
-class Vector(EmbeddedDocument):
-	x = FloatField(required=True)
-	y = FloatField(required=True)
-	z = FloatField(required=True)
-
-class DataPoint(EmbeddedDocument):
-	time = DateTimeField(required = True)	#DateTime
-	gps = GeoPointField()					#Location(gps=[<lon>,<lat>])
-	accel = EmbeddedDocumentField(Vector)	#[<x>,<y>,<z>]
-	gyro = EmbeddedDocumentField(Vector)		#[<x>,<y>,<z>]
-	throttle = FloatField()					
-	brake = FloatField()
-	speed = FloatField()
-	tach = FloatField()
-	frontLeftWheel = FloatField()
-	frontRightWheel = FloatField()
-	backLeftWheel = FloatField()
-	backRightWheel = FloatField()
-
-class DataSession(Document):
-	driver = StringField()
-	start_time = DateTimeField(required = True)
-	end_time = DateTimeField()
-	data = ListField(EmbeddedDocumentField(DataPoint))
 
 connect('baja_beaglebone')
 session = DataSession()
