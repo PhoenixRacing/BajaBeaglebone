@@ -19,4 +19,5 @@ def run():
 	dispatcher.connect(pubAll, sender=dispatcher.Any)
 	while True:
 		dispatcher.send(signal=stringify(vals), sender=nodeName)
+		vals.clear()
 		time.sleep(.1)
