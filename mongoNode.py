@@ -36,6 +36,7 @@ session.save()
 def logData(sender, signal):
 	data = DataPoint()
 	signal = json.loads(signal)
+	data.time = datetime.now()
 	data.frontLeftWheel = signal.get("frontLeftHall", None)
 	data.frontRightWheel = signal.get("frontRightHall", None)
 	data.backLeftHall = signal.get("backLeftWheel", None)
