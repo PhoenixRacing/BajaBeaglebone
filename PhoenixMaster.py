@@ -2,6 +2,7 @@ import time
 import threading
 import subprocess
 import sys
+import os
 
 """ Starts each program as a separate Python thread
 These all die when the main thread is interrupted
@@ -9,11 +10,21 @@ Intended to be master script for starting pubsub nodes """
 class PhoenixMaster(object):
 
 	def __init__(self, thread_nodes, process_nodes=[]):
+		if '-kill' in sys.argv:
+			self.killOtherPythonProcesses()
 		for thread_node in thread_nodes:
 			self.addNode(thread_node)
                 for process_node in process_nodes:
                         self.startProcess(process_node)
 		self.run()
+
+	def killOtherPythonProcesses(self):
+		processes = subprocess.check_output('pgrep python', shell=True).split("\n")
+		this_id = str(os.getpid())
+		processes.remove(this_id)
+		for process in processes:
+			if process:
+				subprocess.call('sudo kill ' + process, shell=True)		
 
 	def startProcess(self, process_node):
 		subprocess.call(process_node, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -30,7 +41,8 @@ class PhoenixMaster(object):
 		try:
 			while True: 
 				time.sleep(1000) #so we don't waste cycles
-		except (KeyboardInterrupt, SystemExit):
+		except:
+			print 'hi'
 			sys.exit()
 
 if __name__=="__main__":
@@ -58,6 +70,6 @@ if __name__=="__main__":
 		lockNode.run,
 		speedNode.run,
 		herokuNode.run,
-		mongoNode.run
+		mongoNode.run,
                 ], ['python dashAppHelper.py']
 	)
