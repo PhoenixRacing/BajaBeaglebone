@@ -44,6 +44,8 @@ if __name__=="__main__":
 	import dummySpeedNode
 	import dummyLockNode
 	import dummyBrakeThrNode
+	import mongoNode
+
         PhoenixMaster([
                 dashAppNode.run,
 #		dummySpeedNode.run,
@@ -56,5 +58,6 @@ if __name__=="__main__":
 		lockNode.run,
 		speedNode.run,
 		herokuNode.run,
+		mongoNode.run
                 ], ['python dashAppHelper.py']
 	)
