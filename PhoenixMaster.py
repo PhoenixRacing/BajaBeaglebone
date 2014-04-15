@@ -44,7 +44,7 @@ if __name__=="__main__":
 	import dummySpeedNode
 	import dummyLockNode
 	import dummyBrakeThrNode
-	import mongoNode
+	from Mongo import mongoNode
 
         PhoenixMaster([
                 dashAppNode.run,
