@@ -33,24 +33,15 @@ session.start_time = datetime.now()
 session.save()
 
 def logData(sender, signal):
-	# TODO this should filter the data in a reasonable manner as well as appending it to the session.data object
-	if (sender == "frontLeftHall"):
-		session.data[0].frontLeftWheel = signal
-	elif (sender == "backLeftHall"):
-		session.data[0].backLeftWheel = signal
-	elif (sender == "frontRightHall"):
-		session.data[0].frontRightWheel = signal
-	elif (sender == "backLeftHall"):
-		session.data[0].backRightWheel = signal
-	elif (sender == "brakePot"):
-		session.data[0].brake = signal
-	elif (sender == "backLeftHall"):
-		session.data[0].throttle = signal
+	data = DataPoint()
+	data.frontLeftWheel = signal.get("frontLeftHall", None)
+	data.frontRightWheel = signal.get("frontRightHall", None)
+	data.backLeftHall = signal.get("backLeftWheel", None)
+	data.backRightWheel = signal.get("backRightHall", None)
+	data.brake = signal.get("brakePot", None)
+	data.throttle = signal.get("throttlePot", None)
+	session.append(data)
+	session.save()
 
 def run():
-	dispatcher.connect(logData, sender="frontLeftHall")
-	dispatcher.connect(logData, sender="frontRightHall")
-	dispatcher.connect(logData, sender="backLeftHall")
-	dispatcher.connect(logData, sender="backRightHall")
-	dispatcher.connect(logData, sender="brakePot")
-	dispatcher.connect(logData, sender="throttlePot")
+	dispatcher.connect(logData, sender="allNode")
