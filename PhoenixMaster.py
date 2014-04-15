@@ -40,6 +40,7 @@ if __name__=="__main__":
 	import loggerNode
 	import lockNode
 	import speedNode
+	import herokuNode
 	import dummySpeedNode
 	import dummyLockNode
 	import dummyBrakeThrNode
@@ -53,6 +54,7 @@ if __name__=="__main__":
 		[loggerNode.run,
 		allNode.run,
 		lockNode.run,
-		speedNode.run
+		speedNode.run,
+		herokuNode.run,
                 ], ['python dashAppHelper.py']
 	)

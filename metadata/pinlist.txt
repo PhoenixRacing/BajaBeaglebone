@@ -7,5 +7,7 @@ P8_10	GPIO	Yes
 P8_8	GPIO	Yes
 P9_39	ADC	Yes	Throttle Pot
 P9_40	ADC	Yes	Brake Pot
+P9_19	I2C	Yes	IMU
+P9_20	I2C	Yes	IMU
 
 http://www.alexanderhiam.com/wp-content/uploads/2012/12/beaglebone_pinout.png
