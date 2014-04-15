@@ -28,4 +28,4 @@ class DataSession(Document):
 	data = ListField(EmbeddedDocumentField(DataPoint))
 
 	def __repr__(self):
-		return pprint(loads(session.to_json()))
+		return pprint(loads(self.to_json()))
