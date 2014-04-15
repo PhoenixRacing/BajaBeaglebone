@@ -1,6 +1,6 @@
 from mongoengine import *
 from json import loads
-from pprint import pprint
+from pprint import pformat
 
 class Vector(EmbeddedDocument):
 	x = FloatField(required=True)
@@ -27,5 +27,8 @@ class DataSession(Document):
 	end_time = DateTimeField()
 	data = ListField(EmbeddedDocumentField(DataPoint))
 
+	def __str__(self):
+		return self.__repr__()
+
 	def __repr__(self):
-		return pprint(loads(self.to_json()))
+		return pformat(loads(self.to_json()))
