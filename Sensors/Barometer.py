@@ -6,8 +6,8 @@ from Sensor import *
 
 class Barometer(Sensor):
 
-	def __init__(self, pins, name, delay=.05):
-		super(self.__class__, self).__init__(pins,1, name)
+	def __init__(self, name, delay=.05):
+		super(self.__class__, self).__init__([],1, name)
 		
 		self.delay = delay
 		
@@ -27,5 +27,5 @@ class Barometer(Sensor):
 			self.publish()
 
 if __name__ == "__main__":
-	B = Barometer([],'Barometer')
+	B = Barometer('Barometer')
 	B.run()

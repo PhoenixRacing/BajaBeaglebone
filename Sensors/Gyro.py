@@ -6,8 +6,8 @@ from Sensor import *
 
 class Gyro(Sensor):
 
-	def __init__(self, pins, name, delay=.05):
-		super(self.__class__, self).__init__(pins, 1, name)
+	def __init__(self, name, delay=.05):
+		super(self.__class__, self).__init__([], 1, name)
 		
 		self.delay = delay
 		self.bus = IMU.l3gd20.setup_bus(1) 					# bus: 3 indicates /dev/i2c-3
@@ -23,5 +23,5 @@ class Gyro(Sensor):
 
 
 if __name__=="__main__":
-	g = Gyro([],'gyro',delay=.05)
+	g = Gyro('gyro')
 	g.run()

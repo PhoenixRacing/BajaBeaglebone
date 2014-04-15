@@ -6,8 +6,8 @@ from Sensor import *
 
 class Accelerometer(Sensor):
 
-	def __init__(self, pins, name, delay=.05):
-		super(self.__class__, self).__init__(pins,1, name)
+	def __init__(self, name, delay=.05):
+		super(self.__class__, self).__init__([],1, name)
 		self.delay = delay
 		self.bus = IMU.lsm303.setup_bus(1) 					# bus: 3 indicates /dev/i2c-3
 		self.Sa = IMU.lsm303.setup_acc(self.bus,IMU.lsm303.SCALE_A_8G)		# acc. scale +/- 8.0 g
@@ -22,5 +22,5 @@ class Accelerometer(Sensor):
 
 
 if __name__ == "__main__":
-	A = Accelerometer([],'Accelerometer',.05)
+	A = Accelerometer('Accelerometer',.05)
 	A.run()

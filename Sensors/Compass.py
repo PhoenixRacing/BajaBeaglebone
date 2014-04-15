@@ -7,8 +7,8 @@ from Sensor import *
 
 class Compass(Sensor):
 
-        def __init__(self, pins, name, delay=.05):
-                super(self.__class__, self).__init__(pins,1, name)
+        def __init__(self, name, delay=.05):
+                super(self.__class__, self).__init__([],1, name)
                 self.delay = delay
                 self.bus = IMU.lsm303.setup_bus(1)                                      # bus: 3 indicates /dev/i2c-3
                 self.Sm = IMU.lsm303.setup_mag(self.bus,IMU.lsm303.SCALE_M_81G)
@@ -24,5 +24,5 @@ class Compass(Sensor):
 
 
 if __name__ == "__main__":
-        C = Compass([],'Compass',.05)
+        C = Compass('Compass',.05)
         C.run()
