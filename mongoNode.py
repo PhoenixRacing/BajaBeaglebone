@@ -1,6 +1,7 @@
 from mongoengine import *
 from datetime import datetime
 from pydispatch import dispatcher
+import json
 
 class Vector(EmbeddedDocument):
 	x = FloatField(required=True)
@@ -34,13 +35,14 @@ session.save()
 
 def logData(sender, signal):
 	data = DataPoint()
+	signal = json.loads(signal)
 	data.frontLeftWheel = signal.get("frontLeftHall", None)
 	data.frontRightWheel = signal.get("frontRightHall", None)
 	data.backLeftHall = signal.get("backLeftWheel", None)
 	data.backRightWheel = signal.get("backRightHall", None)
 	data.brake = signal.get("brakePot", None)
 	data.throttle = signal.get("throttlePot", None)
-	session.append(data)
+	session.data.append(data)
 	session.save()
 
 def run():
