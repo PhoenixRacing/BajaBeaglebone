@@ -20,4 +20,4 @@ def run():
 	while True:
 		dispatcher.send(signal=stringify(vals), sender=nodeName)
 		vals.clear()
-		time.sleep(1)
+		time.sleep(.1)
