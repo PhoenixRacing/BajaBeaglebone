@@ -2,3 +2,4 @@ PyDispatcher
 flask
 flask-socketio
 mongoengine
+grequests

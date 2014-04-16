@@ -7,7 +7,7 @@ from Sensor import *
 
 class Compass(Sensor):
 
-        def __init__(self, name, delay=.05):
+        def __init__(self, name, delay=.1):
                 super(self.__class__, self).__init__([],1, name)
                 self.delay = delay
                 self.bus = IMU.lsm303.setup_bus(1)                                      # bus: 3 indicates /dev/i2c-3

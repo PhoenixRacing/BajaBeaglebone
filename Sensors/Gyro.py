@@ -6,7 +6,7 @@ from Sensor import *
 
 class Gyro(Sensor):
 
-	def __init__(self, name, delay=.05):
+	def __init__(self, name, delay=.1):
 		super(self.__class__, self).__init__([], 1, name)
 		
 		self.delay = delay
