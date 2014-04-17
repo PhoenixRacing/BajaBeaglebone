@@ -59,7 +59,7 @@ if __name__=="__main__":
 #	from Mongo import mongoNode
 
         PhoenixMaster([
-                dashAppNode.run,
+#                dashAppNode.run,
 #		dummySpeedNode.run,
 #		dummyLockNode.run,
 #		dummyBrakeThrNode.run] 
