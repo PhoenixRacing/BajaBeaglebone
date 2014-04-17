@@ -27,7 +27,7 @@ class PhoenixMaster(object):
 				subprocess.call('sudo kill ' + process, shell=True)		
 
 	def startProcess(self, process_node):
-		subprocess.Popen(process_node, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		subprocess.Popen(process_node, shell=True) #, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 	def addNode(self, node):
 		thread = threading.Thread(target=node)
@@ -59,7 +59,7 @@ if __name__=="__main__":
 #	from Mongo import mongoNode
 
         PhoenixMaster([
-#                dashAppNode.run,
+                dashAppNode.run,
 #		dummySpeedNode.run,
 #		dummyLockNode.run,
 #		dummyBrakeThrNode.run] 

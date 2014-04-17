@@ -1,18 +1,16 @@
 from pydispatch import dispatcher
 import urllib2
 import urllib
+import requests
 from random import randint
 import json
 
 def handleSpeed(sender, signal):
 	data = {'speed' : signal}
-	encoded = urllib.urlencode(data)
-	req = urllib2.Request('http://localhost:5000/updatespeed')
-	req.add_data(encoded)
 	try:
-		urllib2.urlopen(req)
+		requests.post('http://localhost:5000/updatespeed', data=data, timeout=1)
 	except:
-		print 'Request failed. Dashboard might not be spun up'
+		print 'request to dash app failed'
 
 def handleLockSpin(sender, signal):
 	s = json.loads(signal)
@@ -20,10 +18,8 @@ def handleLockSpin(sender, signal):
 	s = s.get('spin')
 	data = {'lock': l, 'spin': s}
 	encoded = urllib.urlencode(data)
-	req = urllib2.Request('http://localhost:5000/updatespinlock')
-	req.add_data(encoded)
 	try:
-		urllib2.urlopen(req)
+		requests.post('http://localhost:5000/updatespinlock', data=data)
 	except:
 		print 'Request Failed. Dashboard might not be spun up'
 
@@ -32,11 +28,8 @@ def handleBrakeThrot(sender, signal):
 	b = s.get('brake')
 	t = s.get('throttle')
 	data = {'brake': b, 'throttle': t}
-	encoded = urllib.urlencode(data)
-	req = urllib2.Request('http://localhost:5000//updatebrakethrottle')
-	req.add_data(encoded)
 	try:
-		urllib2.urlopen(req)
+		requests.post('http://localhost:5000//updatebrakethrottle', data=data, timeout=1)
 	except:
 		print 'Request Failed. Dashboard might not be spun up'
 
@@ -46,7 +39,7 @@ def run():
 	dispatcher.connect(handleBrakeThrot, sender="brakethrot")
 
 if __name__=="__main__":
-	handleLockSpin("", 0)
+	handleLockSpin("", json.dumps({}))
 	handleSpeed("", 5)
-	handleBrakeThrot("", 0)
+	handleBrakeThrot("", json.dumps({}))
 
