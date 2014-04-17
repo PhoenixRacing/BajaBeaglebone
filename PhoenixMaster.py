@@ -10,7 +10,7 @@ Intended to be master script for starting pubsub nodes """
 class PhoenixMaster(object):
 
 	def __init__(self, thread_nodes, process_nodes=[]):
-		if '-kill' in sys.argv:
+		if '-nokill' not in sys.argv:
 			self.killOtherPythonProcesses()
 		for thread_node in thread_nodes:
 			self.addNode(thread_node)
@@ -56,7 +56,7 @@ if __name__=="__main__":
 	import dummySpeedNode
 	import dummyLockNode
 	import dummyBrakeThrNode
-	from Mongo import mongoNode
+#	from Mongo import mongoNode
 
         PhoenixMaster([
                 dashAppNode.run,
@@ -70,6 +70,6 @@ if __name__=="__main__":
 		lockNode.run,
 		speedNode.run,
 		herokuNode.run,
-		mongoNode.run,
+#		mongoNode.run,
                 ], ['python dashAppHelper.py']
 	)

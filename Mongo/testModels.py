@@ -6,3 +6,4 @@ from json import loads
 connect('baja_beaglebone')
 session = DataSession.objects().first()
 print session
+print DataSession.objects().count()
