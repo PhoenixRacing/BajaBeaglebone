@@ -27,7 +27,7 @@ class PhoenixMaster(object):
 				subprocess.call('sudo kill ' + process, shell=True)		
 
 	def startProcess(self, process_node):
-		subprocess.call(process_node, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		subprocess.Popen(process_node, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 	def addNode(self, node):
 		thread = threading.Thread(target=node)
@@ -69,7 +69,7 @@ if __name__=="__main__":
 		allNode.run,
 		lockNode.run,
 		speedNode.run,
-		herokuNode.run,
+#		herokuNode.run,
 #		mongoNode.run,
                 ], ['python dashAppHelper.py']
 	)

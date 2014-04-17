@@ -9,9 +9,14 @@ def speed(sender, signal):
 	dispatcher.send(signal=speed, sender="speed")
 
 def calcSpeed(allData):
-	left = allData.get('frontLeftHall', 0)
-	right = allData.get('frontRightHall',0)
+	left = mean(allData.get('frontLeftHall', []))
+	right = mean(allData.get('frontRightHall', []))
 	return (left + right) / 2.0 * WHEEL_DIAMETER
+
+def mean(lis):
+	if not lis:
+		return 0
+	return sum(lis) / len(lis)
 
 def run():
 	dispatcher.connect(speed, sender="allNode")
