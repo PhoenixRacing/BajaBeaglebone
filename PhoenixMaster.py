@@ -42,8 +42,7 @@ class PhoenixMaster(object):
 			while True: 
 				time.sleep(1000) #so we don't waste cycles
 		except:
-			self.killOtherProcesses()
-			sys.exit()
+			subprocess.call("pkill python", shell=True)
 
 if __name__=="__main__":
 	import dashAppNode
