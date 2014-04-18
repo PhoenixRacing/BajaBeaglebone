@@ -42,14 +42,14 @@ class PhoenixMaster(object):
 			while True: 
 				time.sleep(1000) #so we don't waste cycles
 		except:
-			print 'hi'
+			self.killOtherProcesses()
 			sys.exit()
 
 if __name__=="__main__":
 	import dashAppNode
 	import gpioNode
 	import allNode
-	import loggerNode
+	import printNode
 	import lockNode
 	import speedNode
 	import herokuNode
@@ -65,11 +65,11 @@ if __name__=="__main__":
 #		dummyBrakeThrNode.run] 
 		]+ 
 		[sensor.run for sensor in gpioNode.sensors] +
-		[loggerNode.run,
+		[printNode.run,
 		allNode.run,
 		lockNode.run,
 		speedNode.run,
-#		herokuNode.run,
+		herokuNode.run,
 #		mongoNode.run,
                 ], ['python dashAppHelper.py']
 	)
