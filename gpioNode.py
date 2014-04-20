@@ -6,16 +6,48 @@ from Sensors.Gyro import Gyro
 from Sensors.Barometer import Barometer
 from Sensors.Compass import Compass
 
-sensors = [EdgeDetector(["P9_11"], 1, "frontLeftHall"),
-           EdgeDetector(["P9_12"], 1, "frontRightHall"),
-           EdgeDetector(["P9_13"], 1, "backLeftHall"),
-           EdgeDetector(["P9_15"], 1, "backRightHall"),
-           Pot(["P9_40"],"brakePot"),
-           Pot(["P9_39"],"throttlePot"),
-           Accelerometer("Accelerometer"),
-           Gyro("Gyro"),
-           Barometer("Barometer"),
-           Compass("Compass")]
+
+sensors = []
+try:
+	sensors.append(EdgeDetector(["P9_11"], 1, "frontLeftHall"))
+except:
+	pass
+try:          
+	sensor.append(EdgeDetector(["P9_12"], 1, "frontRightHall"))
+except:
+	pass
+try:
+	sensors.append(EdgeDetector(["P9_13"], 1, "backLeftHall"))
+except:
+	pass
+try:
+	sensors.append(EdgeDetector(["P9_15"], 1, "backRightHall"))
+except:
+	pass
+try:
+	sensors.append(Pot(["P9_40"],"brakePot"))
+except:
+	pass
+try:
+	sensors.append(Pot(["P9_39"],"throttlePot"))
+except:
+	pass
+try:
+	sensors.append(Accelerometer("Accelerometer"))
+except:
+	pass
+try:
+	sensors.append(Gyro("Gyro"))
+except:
+	pass
+try:
+	sensors.append(Barometer("Barometer"))
+except:
+	pass
+try:
+	sensors.append(Compass("Compass"))
+except:
+	pass
 
 def dispatch(sensor):
 	dispatcher.send(signal=sensor.getSensorVal(), sender=sensor.getName())

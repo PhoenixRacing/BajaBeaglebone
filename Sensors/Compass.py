@@ -16,7 +16,6 @@ class Compass(Sensor):
         def run(self):
                 while True:
                         m = IMU.lsm303.get_mag(self.bus,self.Sm)
-                        
                         val = (m[0],m[1],m[2])
                         self.setSensorVal(str(val))
                         sleep(self.delay)

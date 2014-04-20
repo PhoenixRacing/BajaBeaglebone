@@ -1,0 +1,20 @@
+you need to run this on startup:
+
+echo T8LO-GPS > /sys/devices/bone_capemgr.*/slots
+
+and
+
+gpsd -F /var/run/gpsd.sock /dev/ttyO4
+
+if this is your first time running this, you need to compile the device tree overlay file (found in this dir)
+and add the compiled .dtbo to /lib/firmware first
+
+dtc -@ -I dts -O dtb -o T8LO-GPS-00A0.dtbo T8LO-GPS-00A0.dts
+
+also you need to install the gpsd stuff (to make the python work)
+
+sudo apt-get update && apt-get install gpsd gpsd-clients ntp
+
+if you're unsure if things are working run
+
+cgps
