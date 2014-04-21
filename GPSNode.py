@@ -3,7 +3,7 @@ from BBGPS import BBGPS
 
 nodeName = "GPS"
 
-gps = BBGPS()
+gps = BBGPS(delay=.1)
 
 def dispatch():
     dispatcher.send(signal=gps.getLatLong(), sender=nodeName)
