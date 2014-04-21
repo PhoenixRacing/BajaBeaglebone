@@ -50,7 +50,8 @@ $(document).ready(function(){
         var spin_flag = msg.spin.toString();
         var lock_flag = msg.lock.toString();
 
-        if (spin_flag == "1") {
+        //Uncomment the following to get spin and lock display
+        /*if (spin_flag == "1") {
             var spin = "S";}
         else {
             var spin = "";}
@@ -61,12 +62,29 @@ $(document).ready(function(){
             var lock = "";}
 
         $('#spin').html('<strong>' + spin + '</strong>');
-        $('#lock').html('<strong>' + lock + '</strong>');
+        $('#lock').html('<strong>' + lock + '</strong>');*/
     })
     setInterval(getSpinLock, 200);
     function getSpinLock() {
         socket.emit('update spin_lock', {data: {}});
     }  
+
+    //Background color is red if we need to go to the pit
+    socket.on('updatePit', function(msg) {
+        var pit_flag = msg.pit.toString();
+
+        if (pit_flag == "1") {
+            var pit = "#D00000";}
+        else {
+            var pit = "#080808";}
+
+        $("body").css("background-color", pit);
+    })
+
+    setInterval(getPit, 200);
+    function getPit() {
+        socket.emit('update pit', {data:{}});
+    }
 
 
  });

@@ -1,14 +1,19 @@
 body {
-	background-color:#e0e0e0;
+	background-color:#080808;
 }
 
 .speed2 {
-	font-size: 290px;
+	font-size: 280px;
 
 }
 
 h1 {
-	color:#181818;
+	color:#e0e0e0;
+}
+
+p {
+	color:#e0e0e0;
+	font-family:Arial;
 }
 
 .speed_display {
@@ -16,7 +21,17 @@ h1 {
 	position:fixed;
 	width:100%;
 	text-align: center;
-	top:40px;
+	top:50px;
+}
+
+.speed_label {
+	color:#e0e0e0;
+	font-family: Arial;
+	font-size:2.5em;
+	position:fixed;
+	text-align:center;
+	width:100%;
+	top:300px;
 }
 
 
@@ -25,8 +40,8 @@ h1 {
 	color: #D00000;
 	font-family:Arial;
 	position: absolute;
-	top: 25px;
-	left: 25px;
+	top: 10px;
+	left: 20px;
 }
 
 .upper_right {
@@ -34,38 +49,52 @@ h1 {
 	color: #D00000;
 	font-family:Arial;
 	position: absolute;
-	top: 25px;
-	right: 25px;
+	top: 10px;
+	right: 20px;
 }
 
 .brake_bar {
 	border-style: solid;
+	border-color:#e0e0e0;
 	position:fixed;
-	left:125px;
+	left:120px;
 	top:100px;
 	width:50px;
 	height:300px;
-	background-color: #181818;
+	background-color: #e0e0e0;
 }
 
 .brake_bar_fill {
-	background-color: #e0e0e0;
+	background-color: #080808;
 	height:40%;
 	width:100%;
+}
+
+.brake_label {
+	position:fixed;
+	left:126px;
+	top:400px;
 }
 
 .throttle_bar {
 	border-style: solid;
+	border-color:#e0e0e0;
 	position:fixed;
-	right:125px;
+	right:120px;
 	top:100px;
 	width:50px;
 	height:300px;
-	background-color: #181818;
+	background-color: #e0e0e0;
 }
 
 .throttle_bar_fill {
-	background-color:#e0e0e0;
+	background-color:#080808;
 	height:40%;
 	width:100%;
+}
+
+.throttle_label {
+	position:fixed;
+	right:120px;
+	top:400px;
 }

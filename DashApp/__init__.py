@@ -17,6 +17,7 @@ class Dashboard(Flask):
 		self.throttle = 0
 		self.spin = 0
 		self.lock = 0
+		self.pit = 0
 
 	def update_speed(self, speed):
 		self.speed = speed
@@ -32,6 +33,9 @@ class Dashboard(Flask):
 	def update_spin_lock(self, lock, spin):
 		self.lock = lock
 		self.spin = spin
+
+	def update_pit(self, pit):
+		self.pit = pit
 
 
 
@@ -75,6 +79,10 @@ def brake_and_throttle(message):
 def spin_or_lock(message):
 	emit('updateSL', {'spin': app.spin, 'lock': app.lock})
 
+@socketio.on('update pit', namespace='/test')
+def pit(message):
+	emit('updatePit', {'pit': app.pit})
+
 
 
 ###Post requests stuff...
@@ -109,7 +117,11 @@ def post_spin_lock():
 	app.update_spin_lock(lock, spin)
 	return 'success\n'
 
-
+@app.route('/updatepit', methods = ['POST'])
+def post_pit():
+	pit = request.form['pit']
+	app.update_pit(pit)
+	return 'success\n'
 
 
 def run():
@@ -127,11 +139,14 @@ def run_brake_throttle():
 def run_spin_lock():
 	pass
 
+def run_pit():
+	pass
+
 
 if __name__ == '__main__':
 		import sys
 
 		sys.path.append('../')
 		from PhoenixMaster import PhoenixMaster
-		PhoenixMaster([run, run_update_speed, run_update_time, run_brake_throttle, run_spin_lock])
+		PhoenixMaster([run, run_update_speed, run_update_time, run_brake_throttle, run_spin_lock, run_pit])
 
