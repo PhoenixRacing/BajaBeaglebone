@@ -2,3 +2,7 @@ PyDispatcher
 flask
 flask-socketio
 Requests
+smbus-cffi
+termcolor
+bitstring
+gevent
