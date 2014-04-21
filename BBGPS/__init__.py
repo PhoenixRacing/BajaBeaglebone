@@ -1,11 +1,12 @@
 #! /usr/local/bin/python
 #-*- coding: utf-8 -*-
-import gps, os, time
+import gps, os, time, sys
 import subprocess
 
 class BBGPS(object):
 	
 	def __init__(self, delay=1):
+		sys.path.append('..')
 		subprocess.call('chmod +x gpshelper.sh',shell=True)
 		subprocess.Popen('./gpshelper.sh',shell=True,stderr=subprocess.PIPE)
 		time.sleep(5)
