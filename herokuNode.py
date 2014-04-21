@@ -6,9 +6,8 @@ from multiprocessing import Process, Pipe
 def postToHeroku(payload):
         if not payload:
                 return
-        base_url = 'http://10.7.24.26:5000/bbdebug/'
-#	base_url = 'http://phoenix-racing.herokuapp.com/bbdebug/'
-	print 'posting %s'%str(payload)
+#        base_url = 'http://10.7.24.26:5000/bbdebug/'
+	base_url = 'http://phoenix-racing.herokuapp.com/bbdebug/'
         return post(base_url, data={"data" : payload}, timeout=.5)
 
 # THIS LOOP RUNS IN A NEW PROCESS

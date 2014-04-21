@@ -9,7 +9,7 @@ from Sensors.Compass import Compass
 
 sensors = []
 try:
-	sensors.append(EdgeDetector(["P9_11"], 1, "frontLeftHall"))
+	sensors.append(EdgeDetector(["P8_10"], 1, "frontLeftHall"))
 except:
 	pass
 try:          
@@ -17,11 +17,19 @@ try:
 except:
 	pass
 try:
-	sensors.append(EdgeDetector(["P9_13"], 1, "backLeftHall"))
+	sensors.append(EdgeDetector(["P8_8"], 1, "backLeftHall"))
 except:
 	pass
 try:
 	sensors.append(EdgeDetector(["P9_15"], 1, "backRightHall"))
+except:
+	pass
+try:
+	sensors.append(EdgeDetector(["P8_11"], 1, "tach"))
+except:
+	pass
+try:
+	sensors.append(EdgeDetector(["P8_9"], 1, "outputShaft"))
 except:
 	pass
 try:
