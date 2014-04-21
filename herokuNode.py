@@ -8,7 +8,6 @@ def postToHeroku(payload):
                 return
 #        base_url = 'http://10.7.24.26:5000/bbdebug/'
 	base_url = 'http://phoenix-racing.herokuapp.com/bbdebug/'
-	print 'posting %s'%str(payload)
         return post(base_url, data={"data" : payload}, timeout=.5)
 
 # THIS LOOP RUNS IN A NEW PROCESS
