@@ -6,9 +6,12 @@ import subprocess
 class BBGPS(object):
 	
 	def __init__(self, delay=1):
-		sys.path.append('..')
-		subprocess.call('chmod +x gpshelper.sh',shell=True)
-		subprocess.Popen('./gpshelper.sh',shell=True,stderr=subprocess.PIPE)
+		if os.path.isfile('gpshelper.sh'):
+			subprocess.call('chmod +x ./gpshelper.sh',shell=True)
+			subprocess.Popen('./gpshelper.sh',shell=True,stderr=subprocess.PIPE)
+		else:
+			subprocess.call('chmod +x ../gpshelper.sh',shell=True)
+			subprocess.Popen('../gpshelper.sh',shell=True,stderr=subprocess.PIPE)
 		time.sleep(5)
 		self.delay = delay
 		self.g = gps.gps(mode=gps.WATCH_NEWSTYLE)
