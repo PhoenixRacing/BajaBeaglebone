@@ -6,11 +6,9 @@ import subprocess
 class BBGPS(object):
 	
 	def __init__(self, delay=1):
-		try:
-			subprocess.check_output("echo T8LO-GPS > /sys/devices/bone_capemgr.*/slots", shell=True)
-		except:
-			pass
-		subprocess.call("gpsd -F /var/run/gpsd.sock /dev/ttyO4", shell=True)
+		subprocess.call('chmod +x gpshelper.sh',shell=True)
+		subprocess.Popen('./gpshelper.sh',shell=True,stderr=subprocess.PIPE)
+		time.sleep(5)
 		self.delay = delay
 		self.g = gps.gps(mode=gps.WATCH_NEWSTYLE)
 		self.lat = 0
