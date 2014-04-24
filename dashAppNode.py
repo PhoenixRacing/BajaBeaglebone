@@ -12,12 +12,12 @@ def handleSpeed(sender, signal):
 	try:
 		urllib2.urlopen(req)
 	except:
-		print 'Request failed. Dashboard might not be spun up'
+		print 'Speed request failed. Dashboard might not be spun up'
 
 def handleLockSpin(sender, signal):
-	s = json.loads(signal)
-	l = s.get('lock')
-	s = s.get('spin')
+	sig = json.loads(signal)
+	l = sig.get('lock')
+	s = sig.get('spin')
 	data = {'lock': l, 'spin': s}
 	encoded = urllib.urlencode(data)
 	req = urllib2.Request('http://localhost:5000/updatespinlock')
@@ -25,7 +25,7 @@ def handleLockSpin(sender, signal):
 	try:
 		urllib2.urlopen(req)
 	except:
-		print 'Request Failed. Dashboard might not be spun up'
+		print 'Lock request Failed. Dashboard might not be spun up'
 
 def handleBrakeThrot(sender, signal):
 	s = json.loads(signal)
@@ -33,20 +33,33 @@ def handleBrakeThrot(sender, signal):
 	t = s.get('throttle')
 	data = {'brake': b, 'throttle': t}
 	encoded = urllib.urlencode(data)
-	req = urllib2.Request('http://localhost:5000//updatebrakethrottle')
+	req = urllib2.Request('http://localhost:5000/updatebrakethrottle')
 	req.add_data(encoded)
 	try:
 		urllib2.urlopen(req)
 	except:
-		print 'Request Failed. Dashboard might not be spun up'
+		print 'BrThr request Failed. Dashboard might not be spun up'
+
+def handlePit(sender, signal):
+	data = {'pit': signal}
+	encoded = urllib.urlencode(data)
+	req = urllib2.Request('http://localhost:5000/updatepit')
+	req.add_data(encoded)
+	try:
+		urllib2.urlopen(req)
+	except:
+		print 'Pit request failed. Dashboard might not be spun up'
+
 
 def run():
 	dispatcher.connect(handleSpeed, sender="speed")
 	dispatcher.connect(handleLockSpin, sender="spinlock")
 	dispatcher.connect(handleBrakeThrot, sender="brakethrot")
+	dispatcher.connect(handlePit, sender="pit")
 
 if __name__=="__main__":
 	handleLockSpin("", 0)
 	handleSpeed("", 5)
 	handleBrakeThrot("", 0)
+	handlePit("", 0)
 

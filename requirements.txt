@@ -1,4 +1,8 @@
 PyDispatcher
 flask
 flask-socketio
-mongoengine
+Requests
+smbus-cffi
+termcolor
+bitstring
+gevent

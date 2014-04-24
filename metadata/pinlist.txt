@@ -1,10 +1,12 @@
 Pin	Type	Working	Sensor
-P9_11	GPIO	Yes	frontLeftHall
+P9_11	GPIO	Yes	gps
 P9_12	GPIO	Yes	frontRightHall
-P9_13	GPIO	Yes	backLeftHall
+P9_13	GPIO	Yes	gps
 P9_15	GPIO	Yes	backRightHall
-P8_10	GPIO	Yes	
-P8_8	GPIO	Yes
+P8_10	GPIO	Yes	frontLeftHall
+P8_8	GPIO	Yes	backLeftHall
+P8_9	GPIO	Ish	outputShaft
+P8_11	GPIO	Ish	tach
 P9_39	ADC	Yes	Throttle Pot
 P9_40	ADC	Yes	Brake Pot
 P9_19	I2C	Yes	IMU

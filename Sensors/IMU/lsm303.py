@@ -49,7 +49,6 @@ SCALE_M_81G = 0b11100000	# +/- 8.1 Gauss scale
 #--------------------------------
 
 def setup_bus(x):
-	print x
 	bus = SMBus(x)    # x indicates /dev/i2c-x
 	return bus
 

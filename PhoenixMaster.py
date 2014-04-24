@@ -10,7 +10,7 @@ Intended to be master script for starting pubsub nodes """
 class PhoenixMaster(object):
 
 	def __init__(self, thread_nodes, process_nodes=[]):
-		if '-kill' in sys.argv:
+		if '-nokill' not in sys.argv:
 			self.killOtherPythonProcesses()
 		for thread_node in thread_nodes:
 			self.addNode(thread_node)
@@ -27,7 +27,7 @@ class PhoenixMaster(object):
 				subprocess.call('sudo kill ' + process, shell=True)		
 
 	def startProcess(self, process_node):
-		subprocess.call(process_node, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		subprocess.Popen(process_node, shell=True) #, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 	def addNode(self, node):
 		thread = threading.Thread(target=node)
@@ -42,34 +42,38 @@ class PhoenixMaster(object):
 			while True: 
 				time.sleep(1000) #so we don't waste cycles
 		except:
-			print 'hi'
-			sys.exit()
+			subprocess.call("pkill python", shell=True)
 
 if __name__=="__main__":
 	import dashAppNode
 	import gpioNode
 	import allNode
-	import loggerNode
+	import printNode
 	import lockNode
 	import speedNode
 	import herokuNode
-	import dummySpeedNode
-	import dummyLockNode
-	import dummyBrakeThrNode
-	from Mongo import mongoNode
+#	import dummySpeedNode
+#	import dummyLockNode
+#	import dummyBrakeThrNode
+#	import dummyPitNode
+	import loggerNode
+	import GPSNode
 
         PhoenixMaster([
                 dashAppNode.run,
 #		dummySpeedNode.run,
 #		dummyLockNode.run,
-#		dummyBrakeThrNode.run] 
+#		dummyBrakeThrNode.run,
+#		dummyPitNode.run],
 		]+ 
-		[sensor.run for sensor in gpioNode.sensors] +
-		[loggerNode.run,
-		allNode.run,
-		lockNode.run,
-		speedNode.run,
-		herokuNode.run,
-		mongoNode.run,
-                ], ['python dashAppHelper.py']
+		[sensor.run for sensor in gpioNode.sensors], #+
+		[printNode.run,
+		 allNode.run,
+		 lockNode.run,
+		 speedNode.run,
+		 herokuNode.run,
+		 loggerNode.run,
+		 GPSNode.run,
+                 ], 
+		['python dashAppHelper.py']
 	)
