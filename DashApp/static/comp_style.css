@@ -101,8 +101,8 @@ p {
 
 .timer {
 	position: absolute;
-	left:210px;
-	bottom: 30px;
+	left:200px;
+	bottom: 10px;
 }
 
 #total_time{

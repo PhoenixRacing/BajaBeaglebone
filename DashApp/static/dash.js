@@ -92,10 +92,29 @@ $(document).ready(function(){
     function getTime(){
         var now = new Date();
         var dt = now - start_time;
-        var seconds = Math.round(((dt/1000) % 60) * 100)/100;
-        var minutes = Math.floor(dt/60000) % 60;
-        var hours = Math.floor(dt/3600000);
-        $('#total_time').text(hours + ':' + minutes + ':' + seconds);
+        $('#total_time').text(hourString(dt) + ':' + minuteString(dt) + ':' + secondString(dt));
     }
 
  });
+
+function minuteString(time){
+    var minutes = Math.floor(time/60000) % 60;
+    minutes = minutes.toString();
+    if (minutes.length < 2){
+        minutes = '0' + minutes;
+    }
+    return minutes
+}
+function secondString(time){
+    var seconds = ((time/1000) % 60).toFixed(2);
+    seconds = seconds.toString()
+    if (seconds.length < 4){
+        seconds = '0' + seconds;
+    }
+    return seconds
+}
+function hourString(time){
+    var hours = Math.floor(time/3600000)
+    hours = hours.toString();
+    return hours
+}
