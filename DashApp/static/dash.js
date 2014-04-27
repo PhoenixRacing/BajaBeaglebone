@@ -78,7 +78,7 @@ $(document).ready(function(){
         if (pit_flag == "1") {
             var pit = "#D00000";}
         else {
-            var pit = "#080808";}
+            var pit = "#D00000";}
 
         $("body").css("background-color", pit);
     })
