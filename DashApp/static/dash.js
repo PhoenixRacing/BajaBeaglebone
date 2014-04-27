@@ -3,6 +3,8 @@
 //Updates the speed, previous time, current time,
 //throttle percentage and brake percentage. 
 
+var start_time = new Date();
+
 $(document).ready(function(){
     var socket = io.connect('http://' + document.domain + ':' + location.port + '/test');
     
@@ -86,5 +88,14 @@ $(document).ready(function(){
         socket.emit('update pit', {data:{}});
     }
 
+    setInterval(getTime, 200);
+    function getTime(){
+        var now = new Date();
+        var dt = now - start_time;
+        var seconds = Math.round(((dt/1000) % 60) * 100)/100;
+        var minutes = Math.floor(dt/60000) % 60;
+        var hours = Math.floor(dt/3600000);
+        $('#total_time').text(hours + ':' + minutes + ':' + seconds);
+    }
 
  });

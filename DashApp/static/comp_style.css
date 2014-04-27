@@ -98,3 +98,16 @@ p {
 	right:120px;
 	top:400px;
 }
+
+.timer {
+	position: absolute;
+	left:210px;
+	bottom: 30px;
+}
+
+#total_time{
+	height: 100%;
+	width: 100%;
+	color: white;
+	font-size: 5em;
+}
