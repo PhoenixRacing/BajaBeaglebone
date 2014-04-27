@@ -46,34 +46,33 @@ class PhoenixMaster(object):
 
 if __name__=="__main__":
 	import dashAppNode
-	import gpioNode
+	# import gpioNode
 	import allNode
 	import printNode
 	import lockNode
 	import speedNode
 	import herokuNode
-#	import dummySpeedNode
-#	import dummyLockNode
-#	import dummyBrakeThrNode
-#	import dummyPitNode
+	import dummySpeedNode
+	import dummyLockNode
+	import dummyBrakeThrNode
+	import dummyPitNode
 	import loggerNode
-	import GPSNode
+	# import GPSNode
 
         PhoenixMaster([
                 dashAppNode.run,
-#		dummySpeedNode.run,
-#		dummyLockNode.run,
-#		dummyBrakeThrNode.run,
-#		dummyPitNode.run],
-		]+ 
-		[sensor.run for sensor in gpioNode.sensors], #+
+		dummySpeedNode.run,
+		dummyLockNode.run,
+		dummyBrakeThrNode.run,
+		dummyPitNode.run] + 
+		# [sensor.run for sensor in gpioNode.sensors] #+
 		[printNode.run,
 		 allNode.run,
 		 lockNode.run,
 		 speedNode.run,
 		 herokuNode.run,
 		 loggerNode.run,
-		 GPSNode.run,
+		 # GPSNode.run,
                  ], 
 		['python dashAppHelper.py']
 	)
