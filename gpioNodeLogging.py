@@ -9,66 +9,47 @@ from Sensors.Compass import Compass
 logger = logging.getLogger("PhoenixMaster.gpio")
 
 sensors = []
+
 edgeDetectors = [
 	(["P8_10"], 1, "frontLeftHall"),
 	(["P9_12"], 1, "frontRightHall"),
-	(["P8_8", 1, "backLeftHall"]),
-	(["P9_15"], 1, "backRightHall")]
+	(["P8_8"], 1, "backLeftHall"),
+	(["P9_15"], 1, "backRightHall"),
+	(["P8_11"], 1, "tach"),
+	(["P8_9"], 1, "outputShaft")]
 
 for ed in edgeDetectors:
 	try:
-		sensors.append(EdgeDetector(ed[0], ed[1], ed[2])
+		sensors.append(EdgeDetector(ed[0], ed[1], ed[2]))
 	except:
-		logger.error("Sensor %s failed", str(ed))
+ 		logger.error("Sensor %s failed", str(ed))
 
-try:
-	sensors.append(EdgeDetector(["P8_10"], 1, "frontLeftHall"))
-except:
-	pass
-try:          
-	sensor.append(EdgeDetector(["P9_12"], 1, "frontRightHall"))
-except:
-	pass
-try:
-	sensors.append(EdgeDetector(["P8_8"], 1, "backLeftHall"))
-except:
-	pass
-try:
-	sensors.append(EdgeDetector(["P9_15"], 1, "backRightHall"))
-except:
-	pass
-try:
-	sensors.append(EdgeDetector(["P8_11"], 1, "tach"))
-except:
-	pass
-try:
-	sensors.append(EdgeDetector(["P8_9"], 1, "outputShaft"))
-except:
-	pass
-try:
-	sensors.append(Pot(["P9_40"],"brakePot"))
-except:
-	pass
-try:
-	sensors.append(Pot(["P9_39"],"throttlePot"))
-except:
-	pass
+pots = [(["P9_40"], "brakePot"), (["P9_39"], "throttlePot")]
+
+for pot in pots:
+	try:
+		sensors.append(Pot(pot[0], pot[1]))
+	except:
+		logger.error("Sensor %s failed", str(pot))
 try:
 	sensors.append(Accelerometer("Accelerometer"))
 except:
-	pass
+	logger.error("Accelerometer failed")
+
 try:
 	sensors.append(Gyro("Gyro"))
 except:
-	pass
+	logger.error("Gyro failed")
+
 try:
 	sensors.append(Barometer("Barometer"))
 except:
-	pass
+	logger.error("Barometer failed")
+
 try:
 	sensors.append(Compass("Compass"))
 except:
-	pass
+	logger.error("Compass failed")
 
 def dispatch(sensor):
 	dispatcher.send(signal=sensor.getSensorVal(), sender=sensor.getName())
