@@ -1,10 +1,12 @@
-from pydispatch import dispatcher
+from PubSub import PubSub
 import time
 from random import randint
 
 def run():
+    p = PubSub("speed")
     while True:
-        dispatcher.send(signal=randint(1,30), sender="speed")
+        p.publish(randint(1,30))
+        print 'published speed'
         time.sleep(1)
 
 if __name__=="__main__":

@@ -1,4 +1,4 @@
-from pydispatch import dispatcher
+import redis
 import subprocess
 from requests import post
 from multiprocessing import Process, Pipe
@@ -11,29 +11,11 @@ def postToHeroku(payload):
 	base_url = 'http://phoenix-racing.herokuapp.com/bbdebug/'
         return post(base_url, data={"data" : payload}, timeout=1)
 
-# THIS LOOP RUNS IN A NEW PROCESS
-# SO IT DOESNT HOG THE GIL, YO
-def herokuLoop(q):
-	logger = logging.getLogger('PhoenixMaster.herokuNode')
-	while True:
-		data = child_conn.recv()
-		if data:
-			try:
-				postToHeroku(data)
-			except:
-				logger.warn('Post to heroku failed')				
-				print 'Post to heroku failed'
-
-def heroku(sender, signal):
-	parent_conn.send(signal)
-
-parent_conn, child_conn = Pipe()
-p = Process(target=herokuLoop, args=(child_conn,))
+r = redis.Redis()
+p = r.pubsub()
 
 def run():
-	p.start()
-	dispatcher.connect(heroku, sender="allNode")
+	p.listen("allNode", postToHeroku)
 
 if __name__=="__main__":
 	run()
-	parent_conn.send("herro")
