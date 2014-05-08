@@ -1,18 +1,19 @@
-from pydispatch import dispatcher
-import json
+from PubSub import PubSub
 
 halls = ["frontLeftHall","frontRightHall", "backLeftHall", "backRightHall"]
 
-def lock(sender, signal):
-	allData = json.loads(signal)
+p = PubSub()
+def lock(sender, allData):
+	if isinstance(allData, long):
+		return
 	for hall in halls:
 		if allData.get(hall, -1) == 0:
-			dispatcher.send(sender="lock", signal=True)
+			p.publish("lock", True)
 			return
-	dispatcher.send(sender="lock", signal=False)
+	p.publish("lock", False)
 
 def run():
-	dispatcher.connect(lock, sender="allNode")
+	p.subscribe("allNode", lock)
 
 if __name__=="__main__":
 	run()

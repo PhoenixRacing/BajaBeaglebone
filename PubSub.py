@@ -2,45 +2,19 @@ import redis
 import json
 
 class PubSub(object):
-    """
-    Very simple Pub/Sub pattern wrapper
-    using simplified Redis Pub/Sub functionality.
- 
-    Usage (publisher)::
- 
-        import redis
- 
-        r = redis.Redis()
- 
-        q = PubSub(r, "channel")
-        q.publish("test data")
- 
- 
-    Usage (listener)::
- 
-        import redis
- 
-        r = redis.Redis()
-        q = PubSub(r, "channel")
- 
-        def handler(data):
-            print "Data received: %r" % data
- 
-        q.subscribe(handler)
- 
-    """
-    def __init__(self, channel="default"):
+    def __init__(self):
         self.redis = redis.Redis()
-        self.channel = channel
+
+    def publish(self, channel, data):
+        self.redis.publish(channel, json.dumps(data))
  
-    def publish(self, data):
-        self.redis.publish(self.channel, data)
- 
-    def subscribe(self, handler):
+    def subscribe(self, channel, handler):
         redis = self.redis.pubsub()
-        redis.psubscribe(self.channel)
- 
+        redis.psubscribe(channel)
         for data_raw in redis.listen():
             data = data_raw["data"]
+            if isinstance(data, long):
+                continue
+            data = json.loads(data)
             sender = data_raw["channel"]
             handler(sender, data)

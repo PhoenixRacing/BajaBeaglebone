@@ -1,4 +1,4 @@
-from pydispatch import dispatcher
+from PubSub import PubSub
 from Sensors.EdgeDetector import EdgeDetector
 from Sensors.Pot import Pot
 from Sensors.Accelerometer import Accelerometer
@@ -58,8 +58,10 @@ try:
 except:
 	logger.error("Unable to add sensor: %s"%sys.exc_info()[0])
 
+
+p = PubSub()
 def dispatch(sensor):
-	dispatcher.send(signal=sensor.getSensorVal(), sender=sensor.getName())
+	p.publish(sensor.getName(), sensor.getSensorVal())
 
 for sensor in sensors:
     sensor.setPublishFunc(lambda sensor=sensor: dispatch(sensor))

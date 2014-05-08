@@ -35,5 +35,6 @@ class PhoenixMaster(object):
 if __name__=="__main__":
 	import dummySpeedNode
 	import allNode
-	import DashApp
-	PhoenixMaster([dummySpeedNode.run, allNode.run, DashApp.run])
+#	import DashApp
+#	import lockNode
+	PhoenixMaster([dummySpeedNode.run, allNode.run]) #, DashApp.run, lockNode.run])

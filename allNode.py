@@ -14,7 +14,7 @@ def handler(sender, signal):
 	print vals
 
 def pushAllNode():
-	pub.publish(stringify(vals))
+	pub.publish(nodeName, vals)
 	clear(vals)
 
 def stringify(dic):
@@ -25,11 +25,11 @@ def clear(dic):
 	for key in dic.keys():
 		dic[key] = []
 
-sub = PubSub("*")
-pub = PubSub(nodeName)
+sub = PubSub()
+pub = PubSub()
 
 def sub_helper():
-	sub.subscribe(handler)
+	sub.subscribe("*", handler)
 
 def run():
  	threading.Thread(target=sub_helper).start()
