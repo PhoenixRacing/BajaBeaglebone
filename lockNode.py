@@ -4,8 +4,6 @@ halls = ["frontLeftHall","frontRightHall", "backLeftHall", "backRightHall"]
 
 p = PubSub()
 def lock(sender, allData):
-	if isinstance(allData, long):
-		return
 	for hall in halls:
 		if allData.get(hall, -1) == 0:
 			p.publish("lock", True)
@@ -15,5 +13,5 @@ def lock(sender, allData):
 def run():
 	p.subscribe("allNode", lock)
 
-if __name__=="__main__":
-	run()
+#if __name__=="__main__":
+#	run()

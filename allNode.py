@@ -11,10 +11,10 @@ def handler(sender, signal):
 	if sender==nodeName:
 		return
 	vals[sender] = vals.get(sender, []) + [signal]
-	print vals
 
 def pushAllNode():
-	pub.publish(nodeName, vals)
+	p2.publish(nodeName, vals)
+	print vals
 	clear(vals)
 
 def stringify(dic):
@@ -25,19 +25,18 @@ def clear(dic):
 	for key in dic.keys():
 		dic[key] = []
 
-sub = PubSub()
-pub = PubSub()
-
+p = PubSub()
+p2 = PubSub()
 def sub_helper():
-	sub.subscribe("*", handler)
+	p.subscribe("*", handler)
 
 def run():
  	threading.Thread(target=sub_helper).start()
 	while True:
-		time.sleep(1)
-		print 'published all node'
+		time.sleep(3)
+		print time.time()
 		pushAllNode()
 
-
-if __name__=="__main__":
-	run()
+#if __name__=="__main__":
+#	pass
+	#	run()

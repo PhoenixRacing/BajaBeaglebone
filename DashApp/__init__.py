@@ -5,8 +5,6 @@ import datetime
 from flask import Flask, render_template, session, request
 from flask.ext.socketio import SocketIO, emit
 
-
-
 class Dashboard(Flask):
 	def __init__(self):
 		super(self.__class__, self).__init__(__name__)
@@ -142,11 +140,5 @@ def run_spin_lock():
 def run_pit():
 	pass
 
-
-if __name__ == '__main__':
-		import sys
-
-		sys.path.append('../')
-		from PhoenixMaster import PhoenixMaster
-		PhoenixMaster([run, run_update_speed, run_update_time, run_brake_throttle, run_spin_lock, run_pit])
-
+if __name__=="__main__":
+	run()
