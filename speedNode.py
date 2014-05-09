@@ -1,10 +1,12 @@
-from pydispatch import dispatcher
-import json
+from PubSub import PubSub
 
 WHEEL_DIAMETER = 2.0 #feet
 
+p1 = PubSub()
+p2 = PubSub()
+s = PubSub()
 def speed(sender, signal):
-	dispatcher.send(signal=calcSpeed(signal), sender="speed")
+	s.publish("speed" calcSpeed(signal))
 
 def calcSpeed(RPM):
 	return RPM * WHEEL_DIAMETER / 2580.0 * 60.0 #MPH
@@ -15,8 +17,8 @@ def mean(lis):
 	return sum(lis) / len(lis)
 
 def run():
-	dispatcher.connect(speed, sender="frontLeftHall")
-	dispatcher.connect(speed, sender="frontRightHall")
+	p1.subscribe("frontLeftHall", speed)
+	p2.subscribe("frontRightHall", speed)
 
 if __name__=="__main__":
 	run()

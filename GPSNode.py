@@ -1,12 +1,14 @@
-from pydispatch import dispatcher
+from PubSub import PubSub
 from BBGPS import BBGPS
 
 nodeName = "GPS"
 
 gps = BBGPS(delay=.1)
 
+p = PubSub()
+
 def dispatch():
-    dispatcher.send(signal=gps.getLatLong(), sender=nodeName)
+    p.publish(nodeName, gps.getLatLong())
 
 gps.publish = dispatch
 

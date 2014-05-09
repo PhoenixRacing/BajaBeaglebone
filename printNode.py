@@ -1,11 +1,10 @@
-from pydispatch import dispatcher
-import json
-import os
+from PubSub import PubSub
 
 def printAll(sender, signal):
-	os.system('cls' if os.name == 'nt' else 'clear')
-	for key, item in json.loads(signal).items():
+	for key, item in signal.items():
 		print key, item
+	print
 
+p = PubSub()
 def run():
-	dispatcher.connect(printAll, sender="allNode")
+	p.subscribe("allNode", printAll)

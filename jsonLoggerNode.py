@@ -1,4 +1,4 @@
-from pydispatch import dispatcher
+from PubSub import PubSub
 import datetime
 
 root = "local"
@@ -20,9 +20,10 @@ def logAll(sender, signal):
 			f.write("\n")
 			f.write(signal)
 
+p = PubSub()
 def run():
 	makeNewFile()
-	dispatcher.connect(logAll, sender="allNode")
+	p.subscribe("allNode", logAll)
 
 if __name__=="__main__":
 	makeNewFile()

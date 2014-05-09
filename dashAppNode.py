@@ -1,11 +1,11 @@
-from pydispatch import dispatcher
+from PubSub import PubSub
 import urllib2
 import urllib
 from random import randint
 import json
 
 def handleSpeed(sender, signal):
-	data = {'speed' : signal}
+	data = {'speed' : json.dumps(signal)}
 	encoded = urllib.urlencode(data)
 	req = urllib2.Request('http://localhost:5000/updatespeed')
 	req.add_data(encoded)
@@ -15,7 +15,7 @@ def handleSpeed(sender, signal):
 		print 'Speed request failed. Dashboard might not be spun up'
 
 def handleLockSpin(sender, signal):
-	sig = json.loads(signal)
+	sig = signal
 	l = sig.get('lock')
 	s = sig.get('spin')
 	data = {'lock': l, 'spin': s}
@@ -28,7 +28,7 @@ def handleLockSpin(sender, signal):
 		print 'Lock request Failed. Dashboard might not be spun up'
 
 def handleBrakeThrot(sender, signal):
-	s = json.loads(signal)
+	s = signal
 	b = s.get('brake')
 	t = s.get('throttle')
 	data = {'brake': b, 'throttle': t}
@@ -51,15 +51,19 @@ def handlePit(sender, signal):
 		print 'Pit request failed. Dashboard might not be spun up'
 
 
+p1 = PubSub()
+p2 = PubSub()
+p3 = PubSub()
+p4 = PubSub()
 def run():
-	dispatcher.connect(handleSpeed, sender="speed")
-	dispatcher.connect(handleLockSpin, sender="spinlock")
-	dispatcher.connect(handleBrakeThrot, sender="brakethrot")
-	dispatcher.connect(handlePit, sender="pit")
+	p1.subscribe("speed", handleSpeed)
+	p2.subscribe("spinLock", handleLockSpin)
+	p3.subscribe("brakeThrot", handleBrakeThrot)
+	p4.subscribe("pit", handlePit)
 
 if __name__=="__main__":
-	handleLockSpin("", 0)
+	handleLockSpin("", {0:0})
 	handleSpeed("", 5)
-	handleBrakeThrot("", 0)
+	handleBrakeThrot("", {0:0})
 	handlePit("", 0)
 

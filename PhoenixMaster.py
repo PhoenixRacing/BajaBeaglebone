@@ -8,7 +8,6 @@ from multiprocessing import Process
 class PhoenixMaster(object):
 
 	def __init__(self, processes):
-		print 'code called'
 		self.processes = processes
 		self.startProcesses()
 		self.killOnInterrupt()
@@ -26,16 +25,40 @@ class PhoenixMaster(object):
 			subprocess.call("pkill python", shell=True)
 
 if __name__=="__main__":
-	import dummySpeedNode
-	import allNode
-	import lockNode
-	import herokuNode
-	def dashApp():
-		import subprocess
-		subprocess.call("python DashApp/__init__.py", shell=True)
+	mode = "LOCAL"
 
-	PhoenixMaster([dummySpeedNode.run, 
-		       allNode.run, 
-		       lockNode.run, 
-		       herokuNode.run,
-		       dashApp])
+	if mode=="LOCAL":
+
+	    import dummySpeedNode
+	    import allNode
+	    import lockNode
+	    import herokuNode
+	    import printNode
+
+	    def dashApp():
+		    import subprocess
+		    subprocess.call("python DashApp/__init__.py", shell=True)
+
+	    PhoenixMaster([dummySpeedNode.run, 
+			   allNode.run, 
+			   lockNode.run, 
+			   herokuNode.run,
+			   dashApp,
+			   printNode.run])
+
+	elif mode=="BB":
+	    import dummySpeedNode
+	    import allNode
+	    import lockNode
+	    import herokuNode
+	    import gpioNode
+
+	    def dashApp():
+		    import subprocess
+		    subprocess.call("python DashApp/__init__.py", shell=True)
+
+	    PhoenixMaster([dummySpeedNode.run, 
+			   allNode.run, 
+			   lockNode.run, 
+			   herokuNode.run] +
+			   [sensor.run for sensor in gpioNode.sensors])
