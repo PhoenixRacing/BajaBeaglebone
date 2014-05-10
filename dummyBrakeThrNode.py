@@ -1,14 +1,14 @@
-from pydispatch import dispatcher
+from PubSub import PubSub
 import time
 import random
-import json
 
+p = PubSub()
 def run():
 	while True:
 		brake_pot = float(random.randint(0,100))/100;
 		throt_pot = float(random.randint(0,100))/100;
-		sig = json.dumps({"brake": brake_pot, "throttle": throt_pot})
-		dispatcher.send(signal= sig, sender = "brakethrot")
+		sig = {"brake": brake_pot, "throttle": throt_pot}
+		p.publish("brakeThrot", sig)
 		time.sleep(1)
 
 if __name__=="__main__":

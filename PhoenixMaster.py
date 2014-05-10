@@ -30,6 +30,9 @@ if __name__=="__main__":
 	if mode=="LOCAL":
 
 	    import dummySpeedNode
+	    import dummyPitNode
+	    import dummyLockNode
+	    import dummyBrakeThrNode
 	    import allNode
 	    import lockNode
 	    import herokuNode
@@ -40,6 +43,9 @@ if __name__=="__main__":
 		    subprocess.call("python DashApp/__init__.py", shell=True)
 
 	    PhoenixMaster([dummySpeedNode.run, 
+			   dummyPitNode.run,
+			   dummyLockNode.run,
+			   dummyBrakeThrNode.run,
 			   allNode.run, 
 			   lockNode.run, 
 			   herokuNode.run,

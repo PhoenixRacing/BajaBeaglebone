@@ -2,10 +2,9 @@ from PubSub import PubSub
 import urllib2
 import urllib
 from random import randint
-import json
 
 def handleSpeed(sender, signal):
-	data = {'speed' : json.dumps(signal)}
+	data = {'speed' : signal}
 	encoded = urllib.urlencode(data)
 	req = urllib2.Request('http://localhost:5000/updatespeed')
 	req.add_data(encoded)
