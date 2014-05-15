@@ -39,7 +39,7 @@ class PhoenixMaster(object):
 		logger.addHandler(ch)
 
 if __name__=="__main__":
-	mode = "BB"
+	mode = "LOCAL"
 
 	if mode=="LOCAL":
 
