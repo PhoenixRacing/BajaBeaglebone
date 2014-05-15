@@ -9,6 +9,7 @@ class PhoenixMaster(object):
 
 	def __init__(self, processes):
 		self.processes = processes
+		self.configLogger()
 		self.startProcesses()
 		self.killOnInterrupt()
 
@@ -24,8 +25,21 @@ class PhoenixMaster(object):
 		except:
 			subprocess.call("pkill python", shell=True)
 
+	def configLogger(self):
+		logger = logging.getLogger('PhoenixMaster')
+		logger.setLevel(logging.DEBUG)
+		fh = logging.FileHandler('logs/main.log')
+		fh.setLevel(logging.DEBUG)
+		ch = logging.StreamHandler()
+		ch.setLevel(logging.ERROR)
+		formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+		fh.setFormatter(formatter)
+		ch.setFormatter(formatter)
+		logger.addHandler(fh)
+		logger.addHandler(ch)
+
 if __name__=="__main__":
-	mode = "LOCAL"
+	mode = "BB"
 
 	if mode=="LOCAL":
 
@@ -55,18 +69,24 @@ if __name__=="__main__":
 			   printNode.run])
 
 	elif mode=="BB":
-	    import dummySpeedNode
 	    import allNode
 	    import lockNode
 	    import herokuNode
 	    import gpioNode
+            import printNode
+            import GPSNode
+            import jsonLoggerNode
+            import speedNode
 
 	    def dashApp():
 		    import subprocess
 		    subprocess.call("python DashApp/__init__.py", shell=True)
 
-	    PhoenixMaster([dummySpeedNode.run, 
-			   allNode.run, 
-			   lockNode.run, 
-			   herokuNode.run] +
+	    PhoenixMaster([allNode.run, 
+			   lockNode.run,
+                           speedNode.run,
+                           jsonLoggerNode.run, 
+			   herokuNode.run,
+                           printNode.run,
+                           GPSNode.run] +
 			   [sensor.run for sensor in gpioNode.sensors])
