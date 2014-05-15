@@ -123,7 +123,7 @@ def post_pit():
 
 
 def run():
-        socketio.run(app)
+        socketio.run(app, host='0.0.0.0')
 
 def run_update_speed():
 	pass
