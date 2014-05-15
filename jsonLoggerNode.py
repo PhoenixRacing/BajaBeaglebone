@@ -1,5 +1,6 @@
 from PubSub import PubSub
 import datetime
+import json
 
 root = "local"
 base = "dump"
@@ -18,7 +19,7 @@ def logAll(sender, signal):
 	if current:
 		with open(current, 'a') as f:
 			f.write("\n")
-			f.write(signal)
+			f.write(json.dumps(signal))
 
 p = PubSub()
 def run():

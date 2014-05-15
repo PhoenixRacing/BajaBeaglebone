@@ -39,7 +39,12 @@ class PhoenixMaster(object):
 		logger.addHandler(ch)
 
 if __name__=="__main__":
-	mode = "LOCAL"
+	mode = "BB"
+
+        def dashApp():
+            import subprocess
+            subprocess.call("python DashApp/__init__.py", shell=True)
+ 
 
 	if mode=="LOCAL":
 
@@ -52,11 +57,7 @@ if __name__=="__main__":
 	    import lockNode
 	    import herokuNode
 	    import printNode
-
-	    def dashApp():
-		    import subprocess
-		    subprocess.call("python DashApp/__init__.py", shell=True)
-
+ 
 	    PhoenixMaster([dummySpeedNode.run, 
 			   dummyPitNode.run,
 			   dummyLockNode.run,
@@ -78,15 +79,12 @@ if __name__=="__main__":
             import jsonLoggerNode
             import speedNode
 
-	    def dashApp():
-		    import subprocess
-		    subprocess.call("python DashApp/__init__.py", shell=True)
-
-	    PhoenixMaster([allNode.run, 
+	    PhoenixMaster([dashApp,
+                           allNode.run, 
 			   lockNode.run,
                            speedNode.run,
                            jsonLoggerNode.run, 
 			   herokuNode.run,
-                           printNode.run,
+#                           printNode.run,
                            GPSNode.run] +
 			   [sensor.run for sensor in gpioNode.sensors])
