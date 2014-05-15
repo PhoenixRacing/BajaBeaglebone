@@ -118,6 +118,7 @@ def post_spin_lock():
 @app.route('/updatepit', methods = ['POST'])
 def post_pit():
 	pit = request.form['pit']
+	print 'flask app says pit val is ', pit
 	app.update_pit(pit)
 	return 'success\n'
 
