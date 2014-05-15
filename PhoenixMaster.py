@@ -25,7 +25,7 @@ class PhoenixMaster(object):
 			subprocess.call("pkill python", shell=True)
 
 if __name__=="__main__":
-	mode = "LOCAL"
+	mode = "BB"
 
 	if mode=="LOCAL":
 
@@ -58,6 +58,7 @@ if __name__=="__main__":
 	    import lockNode
 	    import herokuNode
 	    import gpioNode
+            import printNode
 
 	    def dashApp():
 		    import subprocess
@@ -66,5 +67,6 @@ if __name__=="__main__":
 	    PhoenixMaster([dummySpeedNode.run, 
 			   allNode.run, 
 			   lockNode.run, 
-			   herokuNode.run] +
+			   herokuNode.run,
+                           printNode.run] +
 			   [sensor.run for sensor in gpioNode.sensors])

@@ -5,6 +5,8 @@ from Sensors.Accelerometer import Accelerometer
 from Sensors.Gyro import Gyro
 from Sensors.Barometer import Barometer
 from Sensors.Compass import Compass
+import logging
+import sys
 
 logger = logging.getLogger("PhoenixMaster.gpio")
 
