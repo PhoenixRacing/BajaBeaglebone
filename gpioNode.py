@@ -8,57 +8,58 @@ from Sensors.Compass import Compass
 import logging
 import sys
 
+logging.basicConfig()
 logger = logging.getLogger("PhoenixMaster.gpio")
 
 sensors = []
 try:
 	sensors.append(EdgeDetector(["P8_10"], 1, "frontLeftHall"))
 except:
-	logger.error("Unable to add sensor: %s"%sys.exc_info()[0])
+	logger.error("Unable to add sensor frontlefthall: %s"%sys.exc_info()[0])
 try:          
 	sensor.append(EdgeDetector(["P9_12"], 1, "frontRightHall"))
 except:
-	logger.error("Unable to add sensor: %s"%sys.exc_info()[0])
+	logger.error("Unable to add sensor frontrighthall: %s"%sys.exc_info()[0])
 try:
 	sensors.append(EdgeDetector(["P8_8"], 1, "backLeftHall"))
 except:
-	logger.error("Unable to add sensor: %s"%sys.exc_info()[0])
+	logger.error("Unable to add sensor backlefthall: %s"%sys.exc_info()[0])
 try:
 	sensors.append(EdgeDetector(["P9_15"], 1, "backRightHall"))
 except:
-	logger.error("Unable to add sensor: %s"%sys.exc_info()[0])
+	logger.error("Unable to add sensor backrighthall: %s"%sys.exc_info()[0])
 try:
 	sensors.append(EdgeDetector(["P8_11"], 1, "tach"))
 except:
-	logger.error("Unable to add sensor: %s"%sys.exc_info()[0])
+	logger.error("Unable to add sensor tach: %s"%sys.exc_info()[0])
 try:
 	sensors.append(EdgeDetector(["P8_9"], 1, "outputShaft"))
 except:
-	logger.error("Unable to add sensor: %s"%sys.exc_info()[0])
+	logger.error("Unable to add sensor output shaft: %s"%sys.exc_info()[0])
 try:
 	sensors.append(Pot(["P9_40"],"brakePot"))
 except:
-	logger.error("Unable to add sensor: %s"%sys.exc_info()[0])
+	logger.error("Unable to add sensor brake pot: %s"%sys.exc_info()[0])
 try:
 	sensors.append(Pot(["P9_39"],"throttlePot"))
 except:
-	logger.error("Unable to add sensor: %s"%sys.exc_info()[0])
+	logger.error("Unable to add sensor throttle pot: %s"%sys.exc_info()[0])
 try:
 	sensors.append(Accelerometer("Accelerometer"))
 except:
-	logger.error("Unable to add sensor: %s"%sys.exc_info()[0])
+	logger.error("Unable to add sensor accelerometer: %s"%sys.exc_info()[0])
 try:
 	sensors.append(Gyro("Gyro"))
 except:
-	logger.error("Unable to add sensor: %s"%sys.exc_info()[0])
+	logger.error("Unable to add sensor gyro: %s"%sys.exc_info()[0])
 try:
 	sensors.append(Barometer("Barometer"))
 except:
-	logger.error("Unable to add sensor: %s"%sys.exc_info()[0])
+	logger.error("Unable to add sensor baro: %s"%sys.exc_info()[0])
 try:
 	sensors.append(Compass("Compass"))
 except:
-	logger.error("Unable to add sensor: %s"%sys.exc_info()[0])
+	logger.error("Unable to add sensor compass: %s"%sys.exc_info()[0])
 
 
 p = PubSub()
