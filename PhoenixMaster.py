@@ -39,7 +39,7 @@ class PhoenixMaster(object):
 		logger.addHandler(ch)
 
 if __name__=="__main__":
-	mode = "BB"
+	mode = "LOCAL"
 
 	if mode=="LOCAL":
 
@@ -47,6 +47,7 @@ if __name__=="__main__":
 	    import dummyPitNode
 	    import dummyLockNode
 	    import dummyBrakeThrNode
+	    import dashAppNode
 	    import allNode
 	    import lockNode
 	    import herokuNode
@@ -60,6 +61,7 @@ if __name__=="__main__":
 			   dummyPitNode.run,
 			   dummyLockNode.run,
 			   dummyBrakeThrNode.run,
+			   dashAppNode.run,
 			   allNode.run, 
 			   lockNode.run, 
 			   herokuNode.run,
