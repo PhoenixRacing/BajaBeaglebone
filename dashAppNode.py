@@ -53,6 +53,7 @@ def handlePit(sender, signal):
 p1 = PubSub()
 p2 = PubSub()
 p3 = PubSub()
+p4 = PubSub()
 def speedHandler():
 	p1.subscribe("speed", handleSpeed)
 
