@@ -31,7 +31,7 @@ def sub_helper():
 def run():
  	threading.Thread(target=sub_helper).start()
 	while True:
-		time.sleep(.1)
+		time.sleep(1)
 		pushAllNode()
 
 #if __name__=="__main__":
