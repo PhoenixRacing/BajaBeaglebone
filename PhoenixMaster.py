@@ -71,7 +71,6 @@ if __name__=="__main__":
 
 	elif mode=="BB":
 	    import allNode
-	    import lockNode
 	    import herokuNode
 	    import gpioNode
             import printNode
@@ -81,10 +80,9 @@ if __name__=="__main__":
 
 	    PhoenixMaster([dashApp,
                            allNode.run, 
-			   lockNode.run,
                            speedNode.run,
                            jsonLoggerNode.run, 
 			   herokuNode.run,
-#                           printNode.run,
+                           printNode.run,
                            GPSNode.run] +
 			   [sensor.run for sensor in gpioNode.sensors])
