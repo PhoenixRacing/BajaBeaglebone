@@ -71,10 +71,10 @@ if __name__=="__main__":
 
 	elif mode=="BB":
 	    import allNode
-	    import herokuNode
+#	    import herokuNode
 	    import gpioNode
             import printNode
-            import GPSNode
+#            import GPSNode
             import jsonLoggerNode
             import speedNode
 
@@ -82,7 +82,7 @@ if __name__=="__main__":
                            allNode.run, 
                            speedNode.run,
                            jsonLoggerNode.run, 
-			   herokuNode.run,
-                           printNode.run,
-                           GPSNode.run] +
+#			   herokuNode.run,
+                           printNode.run] +
+#                           GPSNode.run] +
 			   [sensor.run for sensor in gpioNode.sensors])
