@@ -21,17 +21,17 @@ p {
 	position:fixed;
 	width:100%;
 	text-align: center;
-	top:50px;
+	top:25px;
 }
 
 .speed_label {
 	color:#e0e0e0;
 	font-family: Arial;
-	font-size:2.5em;
+	font-size:2em;
 	position:fixed;
 	text-align:center;
 	width:100%;
-	top:300px;
+	top:285px;
 }
 
 
@@ -101,13 +101,15 @@ p {
 
 .timer {
 	position: absolute;
-	left:200px;
-	bottom: 10px;
+	top: 380px;
+	text-align: center;
+	width:100%;
+
 }
 
 #total_time{
+	font-weight:bold;
 	height: 100%;
-	width: 100%;
 	color: #e0e0e0;
 	font-size: 5em;
 	font-family: Arial;

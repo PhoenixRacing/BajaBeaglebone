@@ -10,7 +10,6 @@ def handleSpeed(sender, signal):
 	req = urllib2.Request('http://localhost:5000/updatespeed')
 	req.add_data(encoded)
 	try:
-		print "SPEED"
 		urllib2.urlopen(req)
 	except:
 		print 'Speed request failed. Dashboard might not be spun up'
@@ -37,7 +36,6 @@ def handleBrakeThrot(sender, signal):
 	req = urllib2.Request('http://localhost:5000/updatebrakethrottle')
 	req.add_data(encoded)
 	try:
-		print "BRAKETHROTTLE"
 		urllib2.urlopen(req)
 	except:
 		print 'BrThr request Failed. Dashboard might not be spun up'
@@ -48,29 +46,25 @@ def handlePit(sender, signal):
 	req = urllib2.Request('http://localhost:5000/updatepit')
 	req.add_data(encoded)
 	try:
-		print "PIT"
 		urllib2.urlopen(req)
 	except:
 		print 'Pit request failed. Dashboard might not be spun up'
 
-
+p1 = PubSub()
+p2 = PubSub()
+p3 = PubSub()
 def speedHandler():
-	PubSub().subscribe("speed", handleSpeed)
+	p1.subscribe("speed", handleSpeed)
 
 def brakeThrotHandler():
-	PubSub().subscribe("brakeThrot", handleBrakeThrot)
+	p2.subscribe("brakeThrot", handleBrakeThrot)
 
 def pitHandler():
-	PubSub().subscribe("pit", handlePit)
-
-p4 = PubSub()
+	p3.subscribe("pit", handlePit)
 
 def run():
 	threading.Thread(target=speedHandler).start()
-#	p2.subscribe("spinLock", handleLockSpin)
 	threading.Thread(target=brakeThrotHandler).start()
-#	p3.subscribe("brakeThrot", handleBrakeThrot)
-#	threading.Thread(target=pitHandler).start()
 	p4.subscribe("pit", handlePit)
 
 

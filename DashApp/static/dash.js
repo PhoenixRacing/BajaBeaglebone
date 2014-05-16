@@ -74,7 +74,6 @@ $(document).ready(function(){
     //Background color is red if we need to go to the pit
     socket.on('updatePit', function(msg) {
         var pit_flag = msg.pit.toString();
-        console.log("Got pit flag");
 
         if (pit_flag == "1") {
             var pit = "#D00000";

@@ -13,27 +13,11 @@ logger = logging.getLogger("PhoenixMaster.gpio")
 
 sensors = []
 try:
-	sensors.append(EdgeDetector(["P8_10"], 1, "frontLeftHall"))
-except:
-	logger.error("Unable to add sensor frontlefthall: %s"%sys.exc_info()[0])
-try:          
-	sensor.append(EdgeDetector(["P9_12"], 1, "frontRightHall"))
-except:
-	logger.error("Unable to add sensor frontrighthall: %s"%sys.exc_info()[0])
-try:
-	sensors.append(EdgeDetector(["P8_8"], 1, "backLeftHall"))
-except:
-	logger.error("Unable to add sensor backlefthall: %s"%sys.exc_info()[0])
-try:
-	sensors.append(EdgeDetector(["P9_15"], 1, "backRightHall"))
-except:
-	logger.error("Unable to add sensor backrighthall: %s"%sys.exc_info()[0])
-try:
 	sensors.append(EdgeDetector(["P8_11"], 1, "tach"))
 except:
 	logger.error("Unable to add sensor tach: %s"%sys.exc_info()[0])
 try:
-	sensors.append(EdgeDetector(["P8_9"], 1, "outputShaft"))
+	sensors.append(EdgeDetector(["P8_9"], 2, "outputShaft", numPoints=5))
 except:
 	logger.error("Unable to add sensor output shaft: %s"%sys.exc_info()[0])
 try:
