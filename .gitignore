@@ -1,4 +1,7 @@
-*.py[cod]
+local/
+*~
+
+*.py[cod~]
 
 # C extensions
 *.so

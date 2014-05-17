@@ -1,0 +1,26 @@
+# interfaces(5) file used by ifup(8) and ifdown(8)
+# this file should be in the directory /etc/network/
+
+# loopback network interface
+auto lo
+iface lo inet loopback
+
+# usb networking
+auto usb0
+iface usb0 inet static
+address 192.168.42.42
+netmask 255.255.255.0
+network 192.168.42.0
+gateway 192.168.42.129
+broadcast 192.168.42.255
+
+# primary network interface
+auto eth0
+iface eth0 inet dhcp
+#hwaddress ether DE:AD:BE:EF:CA:FE
+
+# wireless network interface
+#auto wlan0
+#iface wlan0 inet dhcp
+#   wpa-ssid "my_wifi_name"
+#   wpa-psk  "my_wifi_pass"
