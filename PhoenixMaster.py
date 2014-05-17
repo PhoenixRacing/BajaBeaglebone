@@ -8,6 +8,7 @@ from multiprocessing import Process
 class PhoenixMaster(object):
 
 	def __init__(self, processes):
+		subprocess.call("redis-server")
 		self.processes = processes
 		self.configLogger()
 		self.startProcesses()
@@ -39,7 +40,7 @@ class PhoenixMaster(object):
 		logger.addHandler(ch)
 
 if __name__=="__main__":
-	mode = "LOCAL"
+	mode = "BB"
 
         def dashApp():
             import subprocess

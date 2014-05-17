@@ -41,6 +41,7 @@ class EdgeDetector(Sensor):
 		GPIO.add_event_detect(self.pins[0], GPIO.RISING)
 		while True:
 			if GPIO.event_detected(self.pins[0]):
+				print "EDGE"
 				self.edgeDetected()
 			if time.time() - self.currentEdge > self.timeout:
 				self.setZero()
