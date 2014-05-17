@@ -8,7 +8,8 @@ from multiprocessing import Process
 class PhoenixMaster(object):
 
 	def __init__(self, processes):
-		subprocess.call("redis-server")
+		subprocess.Popen("redis-server")
+		time.sleep(1)
 		self.processes = processes
 		self.configLogger()
 		self.startProcesses()
