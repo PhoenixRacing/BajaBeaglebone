@@ -30,20 +30,27 @@ $(document).ready(function(){
 
     //Updates the throttle fill bar (to the right of the speed)
     //Updates the brake fill bar (to the left of the speed)
-    socket.on('updateBrakeThrottle', function(msg) {
-        var b_percent = msg.brake * 100;
+    socket.on('updateBrake', function(msg) {
+        var b_percent = (1 - msg.brake) * 100;
         var str_b_percent = b_percent.toString();
         var brake = str_b_percent.concat("%");
-        $(".brake_bar_fill").css( "height", brake );
+        $(".brake_bar_fill").css( "height", brake);
 
-        var throt_p =  msg.throttle*100;
+    });
+    setInterval(getBrake, 80);
+    function getBrake() {
+        socket.emit('update brake', {data : {}});
+    }  
+
+    socket.on('updateThrottle', function(msg) {
+        var throt_p =  (1 - msg.throttle)*100;
         var str_throttle = throt_p.toString();
         var throttle = str_throttle.concat("%");
-        $(".throttle_bar_fill").css("height", throttle );
+        $(".throttle_bar_fill").css("height", throttle);
     });
-    setInterval(getBrakeThrottle, 80);
-    function getBrakeThrottle() {
-        socket.emit('update brake_throttle', {data : {}});
+    setInterval(getThrottle, 80);
+    function getThrottle() {
+        socket.emit('update throttle', {data : {}});
     }  
 
 

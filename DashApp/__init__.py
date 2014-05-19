@@ -24,8 +24,10 @@ class Dashboard(Flask):
 		self.ptime = ptime
 		self.ctime = ctime
 
-	def update_brake_throttle(self, brake, throttle):
+	def update_brake(self, brake):
 		self.brake = brake
+
+	def update_throttle(self, throttle):
 		self.throttle = throttle
 
 	def update_spin_lock(self, lock, spin):
@@ -60,7 +62,7 @@ def competition():
 
 @socketio.on('update', namespace='/test')
 def test_message(message):
-	emit('updateSpeed', {'speed': int(app.speed) })
+	emit('updateSpeed', {'speed': app.speed })
 
 @socketio.on('update time', namespace='/test')
 def get_time(message):
@@ -69,9 +71,16 @@ def get_time(message):
 	curr_t = '00:00';
 	emit('updateTime', {'prev':app.ptime, 'curr': app.ctime})
 
-@socketio.on('update brake_throttle', namespace='/test')
-def brake_and_throttle(message):
-	emit('updateBrakeThrottle', {'brake': app.brake, 'throttle': app.throttle})
+#@socketio.on('update brake_throttle', namespace='/test')
+#def brake_and_throttle(message):
+#	emit('updateBrakeThrottle', {'brake': app.brake, 'throttle': app.throttle})
+@socketio.on('update brake', namespace='/test')
+def brake(message):
+	emit('updateBrake', {'brake': app.brake})
+
+@socketio.on('update throttle', namespace='/test')
+def throttle(message):
+	emit('updateThrottle', {'throttle': app.throttle})
 
 @socketio.on('update spin_lock', namespace='/test')
 def spin_or_lock(message):
@@ -100,12 +109,16 @@ def post_ptime():
 	app.update_time(prev_time, curr_time)
 	return 'success\n'
 
-@app.route('/updatebrakethrottle', methods = ['POST'])
-def post_brake_throttle():
-#assumes brake and throttle values are pot values between 0 and 1
+@app.route('/updatebrake', methods = ['POST'])
+def post_brake():
 	brake = request.form['brake']
+	app.update_brake(brake)
+	return 'success\n'
+
+@app.route('/updatethrottle', methods = ['POST'])
+def post_throttle():
 	throttle = request.form['throttle']
-	app.update_brake_throttle(brake, throttle)
+	app.update_throttle(throttle)
 	return 'success\n'
 
 @app.route('/updatespinlock', methods = ['POST'])
@@ -125,21 +138,6 @@ def post_pit():
 
 def run():
         socketio.run(app, host='0.0.0.0')
-
-def run_update_speed():
-	pass
-
-def run_update_time():
-	pass
-
-def run_brake_throttle():
-	pass
-
-def run_spin_lock():
-	pass
-
-def run_pit():
-	pass
 
 if __name__=="__main__":
 	run()
