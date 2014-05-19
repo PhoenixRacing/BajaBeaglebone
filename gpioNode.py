@@ -16,10 +16,10 @@ try:
  	sensors.append(EdgeDetector(["P8_11"], 1, "tach"))
 except:
  	logger.error("Unable to add sensor tach: %s"%sys.exc_info()[0])
-try:
-	sensors.append(EdgeDetector(["P8_9"], 2, "outputShaft", numPoints=5))
-except:
-	logger.error("Unable to add sensor output shaft: %s"%sys.exc_info()[0])
+#try:
+#	sensors.append(EdgeDetector(["P8_9"], 2, "outputShaft", numPoints=5))
+#except:
+#	logger.error("Unable to add sensor output shaft: %s"%sys.exc_info()[0])
 try:
 	sensors.append(Pot(["P9_40"],"brake"))
 except:

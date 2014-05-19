@@ -81,9 +81,5 @@ def run():
 
 
 if __name__=="__main__":
-	handleLockSpin("", {0:0})
-	handleSpeed("", 5)
-	handleThrot("", 0)
-	handleBrake("", 0)
-	handlePit("", 0)
+	handleThrot("", .3)
 

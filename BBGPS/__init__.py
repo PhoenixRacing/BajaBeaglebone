@@ -17,6 +17,13 @@ class BBGPS(object):
 		self.g = gps.gps(mode=gps.WATCH_NEWSTYLE)
 		self.lat = 0
 		self.long = 0
+		self.speed = 0
+
+	def getSpeed(self):
+		self.speed = self.g.fix.speed
+		if speed == nan:
+			self.speed = 0
+		return self.speed
 
 	def getLatLong(self):
 		return (self.g.fix.latitude, self.g.fix.longitude)
@@ -39,7 +46,7 @@ class BBGPS(object):
 		print self
 
 	def __repr__(self):
-		return "Latitude: %s\nLongitude:%s\n"%(self.lat, self.long)
+		return "Latitude: %s\nLongitude:%s\n, Speed: %s"%(self.lat, self.long, self.speed)
 
 
 if __name__=="__main__":

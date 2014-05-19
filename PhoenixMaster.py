@@ -75,18 +75,17 @@ if __name__=="__main__":
 
 	elif mode=="BB":
 	    import allNode
+            import GPSNode
 #	    import herokuNode
 	    import gpioNode
             import printNode
-#            import GPSNode
             import jsonLoggerNode
-            import speedNode
             import dashAppNode
 
 	    PhoenixMaster([dashApp,
+                           GPSNode.run,
                            dashAppNode.run,
                            allNode.run, 
-                           speedNode.run,
                            jsonLoggerNode.run, 
 #			   herokuNode.run,
                            printNode.run] +
