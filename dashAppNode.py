@@ -16,6 +16,7 @@ def handleSpeed(sender, signal):
 
 def handleLockSpin(sender, signal):
 	sig = signal
+	print '\n',signal,'\n\n\n'
 	l = sig.get('lock')
 	s = sig.get('spin')
 	data = {'lock': l, 'spin': s}
@@ -27,18 +28,23 @@ def handleLockSpin(sender, signal):
 	except:
 		print 'Lock request Failed. Dashboard might not be spun up'
 
-def handleBrakeThrot(sender, signal):
-	s = signal
-	b = s.get('brake')
-	t = s.get('throttle')
-	data = {'brake': b, 'throttle': t}
-	encoded = urllib.urlencode(data)
-	req = urllib2.Request('http://localhost:5000/updatebrakethrottle')
+def handleThrot(sender, signal):
+	encoded = urllib.urlencode({"throttle" : signal})
+	req = urllib2.Request('http://localhost:5000/updatethrottle')
 	req.add_data(encoded)
 	try:
 		urllib2.urlopen(req)
 	except:
-		print 'BrThr request Failed. Dashboard might not be spun up'
+		print 'Throt request Failed. Dashboard might not be spun up'
+
+def handleBrake(sender, signal):
+	encoded = urllib.urlencode({"brake" : signal})
+	req = urllib2.Request('http://localhost:5000/updatebrake')
+	req.add_data(encoded)
+	try:
+		urllib2.urlopen(req)
+	except:
+		print 'Brake request Failed. Dashboard might not be spun up'
 
 def handlePit(sender, signal):
 	data = {'pit': signal}
@@ -54,24 +60,30 @@ p1 = PubSub()
 p2 = PubSub()
 p3 = PubSub()
 p4 = PubSub()
+
 def speedHandler():
 	p1.subscribe("speed", handleSpeed)
 
-def brakeThrotHandler():
-	p2.subscribe("brakeThrot", handleBrakeThrot)
+def brakeHandler():
+	p2.subscribe("brake", handleBrake)
+
+def throtHandler():
+	p3.subscribe("throttle", handleThrot)
 
 def pitHandler():
-	p3.subscribe("pit", handlePit)
+	p4.subscribe("pit", handlePit)
 
 def run():
 	threading.Thread(target=speedHandler).start()
-	threading.Thread(target=brakeThrotHandler).start()
+	threading.Thread(target=brakeHandler).start()
+	threading.Thread(target=throtHandler).start()
 	p4.subscribe("pit", handlePit)
 
 
 if __name__=="__main__":
 	handleLockSpin("", {0:0})
 	handleSpeed("", 5)
-	handleBrakeThrot("", {0:0})
+	handleThrot("", 0)
+	handleBrake("", 0)
 	handlePit("", 0)
 

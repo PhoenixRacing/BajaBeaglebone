@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import time
 import subprocess
 import sys
@@ -8,6 +10,8 @@ from multiprocessing import Process
 class PhoenixMaster(object):
 
 	def __init__(self, processes):
+		subprocess.Popen("redis-server")
+		time.sleep(1)
 		self.processes = processes
 		self.configLogger()
 		self.startProcesses()
@@ -39,7 +43,7 @@ class PhoenixMaster(object):
 		logger.addHandler(ch)
 
 if __name__=="__main__":
-	mode = "LOCAL"
+	mode = "BB"
 
         def dashApp():
             import subprocess
@@ -77,8 +81,10 @@ if __name__=="__main__":
 #            import GPSNode
             import jsonLoggerNode
             import speedNode
+            import dashAppNode
 
 	    PhoenixMaster([dashApp,
+                           dashAppNode.run,
                            allNode.run, 
                            speedNode.run,
                            jsonLoggerNode.run, 
