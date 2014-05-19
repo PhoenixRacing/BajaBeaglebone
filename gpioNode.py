@@ -21,11 +21,11 @@ try:
 except:
 	logger.error("Unable to add sensor output shaft: %s"%sys.exc_info()[0])
 try:
-	sensors.append(Pot(["P9_40"],"brakePot"))
+	sensors.append(Pot(["P9_40"],"brake"))
 except:
 	logger.error("Unable to add sensor brake pot: %s"%sys.exc_info()[0])
 try:
-	sensors.append(Pot(["P9_39"],"throttlePot"))
+	sensors.append(Pot(["P9_39"],"throttle"))
 except:
 	logger.error("Unable to add sensor throttle pot: %s"%sys.exc_info()[0])
 # try:

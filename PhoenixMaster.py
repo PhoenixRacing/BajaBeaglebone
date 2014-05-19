@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import time
 import subprocess
 import sys
@@ -79,8 +81,10 @@ if __name__=="__main__":
 #            import GPSNode
             import jsonLoggerNode
             import speedNode
+            import dashAppNode
 
 	    PhoenixMaster([dashApp,
+                           dashAppNode.run,
                            allNode.run, 
                            speedNode.run,
                            jsonLoggerNode.run, 

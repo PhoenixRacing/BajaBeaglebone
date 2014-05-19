@@ -9,7 +9,7 @@ def speed(sender, signal):
 	s.publish("speed", calcSpeed(signal))
 
 def calcSpeed(RPM):
-	return RPM * WHEEL_DIAMETER / 2580.0 * 60.0 / 11.0 * scale #MPH
+	return RPM * WHEEL_DIAMETER / 2580.0 * 60.0 / 11.0 * scale #MPH + 5
 
 def run():
 	p.subscribe("outputShaft", speed)
