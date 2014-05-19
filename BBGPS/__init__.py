@@ -21,7 +21,7 @@ class BBGPS(object):
 
 	def getSpeed(self):
 		self.speed = self.g.fix.speed
-		if speed == nan:
+		if self.speed != self.speed:
 			self.speed = 0
 		return self.speed
 

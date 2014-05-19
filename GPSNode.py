@@ -3,7 +3,7 @@ from BBGPS import BBGPS
 
 nodeName = "GPS"
 
-gps = BBGPS(delay=.1)
+gps = BBGPS(delay=1)
 
 p = PubSub()
 p1 = PubSub()
