@@ -3,7 +3,7 @@ body {
 }
 
 .speed2 {
-	font-size: 280px;
+	font-size: 250px;
 
 }
 
@@ -21,7 +21,7 @@ p {
 	position:fixed;
 	width:100%;
 	text-align: center;
-	top:25px;
+	top:35px;
 }
 
 .speed_label {
@@ -57,7 +57,7 @@ p {
 	border-style: solid;
 	border-color:#e0e0e0;
 	position:fixed;
-	left:120px;
+	left:100px;
 	top:100px;
 	width:50px;
 	height:300px;
@@ -80,7 +80,7 @@ p {
 	border-style: solid;
 	border-color:#e0e0e0;
 	position:fixed;
-	right:120px;
+	right:100px;
 	top:100px;
 	width:50px;
 	height:300px;

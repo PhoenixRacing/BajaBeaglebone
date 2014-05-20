@@ -1,6 +1,7 @@
 import random
 import time
 import datetime
+import unicodedata
 
 from flask import Flask, render_template, session, request
 from flask.ext.socketio import SocketIO, emit
@@ -62,6 +63,11 @@ def competition():
 
 @socketio.on('update', namespace='/test')
 def test_message(message):
+	str(app.speed)
+	if app.speed[1] == '.':
+		app.speed = app.speed[:3]
+	if app.speed[2] == '.':
+		app.speed = app.speed[:4]
 	emit('updateSpeed', {'speed': app.speed })
 
 @socketio.on('update time', namespace='/test')
