@@ -43,7 +43,7 @@ class PhoenixMaster(object):
 		logger.addHandler(ch)
 
 if __name__=="__main__":
-	mode = "BB"
+	mode = "LOCAL"
 
         def dashApp():
             import subprocess
@@ -59,7 +59,7 @@ if __name__=="__main__":
 	    import dashAppNode
 	    import allNode
 	    import lockNode
-	    import herokuNode
+	    #import herokuNode
 	    import printNode
  
 	    PhoenixMaster([dummySpeedNode.run, 
@@ -69,7 +69,7 @@ if __name__=="__main__":
 			   dashAppNode.run,
 			   allNode.run, 
 			   lockNode.run, 
-			   herokuNode.run,
+			   #herokuNode.run,
 			   dashApp,
 			   printNode.run])
 
