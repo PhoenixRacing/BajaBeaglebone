@@ -117,15 +117,17 @@ def post_ptime():
 
 @app.route('/updatebrake', methods = ['POST'])
 def post_brake():
-	brake = request.form['brake']
-	app.update_brake(brake)
-	return 'success\n'
+#	brake = request.form['brake']
+#	app.update_brake(brake)
+#	return 'success\n'
+	pass
 
 @app.route('/updatethrottle', methods = ['POST'])
 def post_throttle():
-	throttle = request.form['throttle']
-	app.update_throttle(throttle)
-	return 'success\n'
+#	throttle = request.form['throttle']
+#	app.update_throttle(throttle)
+#	return 'success\n'
+	pass
 
 @app.route('/updatespinlock', methods = ['POST'])
 def post_spin_lock():
