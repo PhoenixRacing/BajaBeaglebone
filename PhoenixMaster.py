@@ -53,7 +53,7 @@ if __name__=="__main__":
 	if mode=="LOCAL":
 
 	    import dummySpeedNode
-	    import dummyPitNode
+#	    import dummyPitNode
 	    import dummyLockNode
 	    import dummyBrakeThrNode
 	    import dashAppNode
@@ -63,7 +63,7 @@ if __name__=="__main__":
 	    import printNode
  
 	    PhoenixMaster([dummySpeedNode.run, 
-			   dummyPitNode.run,
+#			   dummyPitNode.run,
 			   dummyLockNode.run,
 			   dummyBrakeThrNode.run,
 			   dashAppNode.run,
@@ -75,7 +75,7 @@ if __name__=="__main__":
 
 	elif mode=="BB":
 	    import allNode
-            import GPSNode
+#        import GPSNode
 #	    import herokuNode
 	    import gpioNode
             import printNode
